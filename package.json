@@ -4,7 +4,8 @@
 	"description": "",
 	"main": "dist/index.js",
 	"scripts": {
-		"start": "node index.js"
+		"start": "node index.js",
+		"push": "defender-autotask update-code f07aac12-a5b1-4855-b76e-d82985dd00b8 ."
 	},
 	"keywords": [],
 	"author": "",
@@ -13,8 +14,6 @@
 		"dotenv": "^8.2.0"
 	},
 	"dependencies": {
-		"axios": "^0.27.2",
-		"defender-autotask-utils": "^1.22.0",
-		"defender-relay-client": "1.1.1-rc.0"
+		"axios": "^0.27.2"
 	}
 }
