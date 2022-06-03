@@ -1,57 +1,15 @@
-const axios = require('axios');
+const main = require('./main');
 
 exports.handler = async (event) => {
-	const payload = event.request.body;
-	const { matchReasons, sentinel } = payload;
-	const eventType = matchReasons[0].signature.replace(/ *\([^)]*\) */g, "");
-	const { id } = sentinel;
-	const { tokenAddress, volume, bountyId, bountyAddress } = matchReasons[0].params;
-
-	const headers = {
-		'Authorization': events.secrets.GITHUB_BOT_SECRET
-	};
-
-	let baseUrl = null;
-	switch (id) {
-		case '2428d581-5289-40d2-927d-67ab8b58e2eb':
-			baseUrl = 'https://development.openq.dev';
-			break;
-		default:
-			throw new Error('Incorrect Environment');
+	try {
+		let result = await main(event);
+		return result;
+	} catch (error) {
+		return `Error occured during processing: ${error}`;
 	}
-
-	let result = null;
-	switch (eventType) {
-		case 'BountyCreated':
-			result = await axios.post(`${baseUrl}/githubbot/created`, {
-				bountyId,
-				id: bountyAddress
-			}, headers);
-			break;
-		case 'TokenDepositReceived':
-			result = await axios.post(`${baseUrl}/githubbot/funded`, {
-				bountyId,
-				id: bountyAddress,
-				deposit: {
-					tokenAddress,
-					tokenVolumes: volume
-				}
-			}, headers);
-			break;
-		case 'DepositRefunded':
-			result = await axios.post(`${baseUrl}/githubbot/refunded`, {
-				bountyId,
-				id: bountyAddress
-			});
-			break;
-		default:
-			throw new Error('Unknown Event');
-	}
-
-	return { bountyId, organization, issuerAddress, bountyAddress, bountyMintTime };
 };
 
-// // // To run locally (this code will not be executed in Autotasks)
+// To run locally (this code will not be executed in Autotasks)
 // if (require.main === module) {
 // 	require('dotenv').config();
 // 	const { API_KEY: apiKey, API_SECRET: apiSecret } = process.env;
