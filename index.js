@@ -7,6 +7,10 @@ exports.handler = async (event) => {
 	const { id } = sentinel;
 	const { tokenAddress, volume, bountyId, bountyAddress } = matchReasons[0].params;
 
+	const headers = {
+		'Authorization': events.secrets.GITHUB_BOT_SECRET
+	};
+
 	let baseUrl = null;
 	switch (id) {
 		case '2428d581-5289-40d2-927d-67ab8b58e2eb':
@@ -22,7 +26,7 @@ exports.handler = async (event) => {
 			result = await axios.post(`${baseUrl}/githubbot/created`, {
 				bountyId,
 				id: bountyAddress
-			});
+			}, headers);
 			break;
 		case 'TokenDepositReceived':
 			result = await axios.post(`${baseUrl}/githubbot/funded`, {
@@ -32,7 +36,7 @@ exports.handler = async (event) => {
 					tokenAddress,
 					tokenVolumes: volume
 				}
-			});
+			}, headers);
 			break;
 		case 'DepositRefunded':
 			result = await axios.post(`${baseUrl}/githubbot/refunded`, {
