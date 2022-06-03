@@ -3,8 +3,9 @@ const axios = require('axios');
 exports.handler = async (event) => {
 	const payload = event.request.body;
 	const { matchReasons, sentinel } = payload;
+	const eventType = matchReasons[0].signature.replace(/ *\([^)]*\) */g, "");
 	const { id } = sentinel;
-	const { bountyId, organization, issuerAddress, bountyAddress, bountyMintTime } = matchReasons[0].params;
+	const { tokenAddress, volume, bountyId, bountyAddress } = matchReasons[0].params;
 
 	let baseUrl = null;
 	switch (id) {
@@ -15,10 +16,33 @@ exports.handler = async (event) => {
 			throw new Error('Incorrect Environment');
 	}
 
-	const result = await axios.post(`${baseUrl}/githubbot/created`, {
-		bountyId,
-		id: bountyAddress
-	});
+	let result = null;
+	switch (eventType) {
+		case 'BountyCreated':
+			result = await axios.post(`${baseUrl}/githubbot/created`, {
+				bountyId,
+				id: bountyAddress
+			});
+			break;
+		case 'TokenDepositReceived':
+			result = await axios.post(`${baseUrl}/githubbot/funded`, {
+				bountyId,
+				id: bountyAddress,
+				deposit: {
+					tokenAddress,
+					tokenVolumes: volume
+				}
+			});
+			break;
+		case 'DepositRefunded':
+			result = await axios.post(`${baseUrl}/githubbot/refunded`, {
+				bountyId,
+				id: bountyAddress
+			});
+			break;
+		default:
+			throw new Error('Unknown Event');
+	}
 
 	return { bountyId, organization, issuerAddress, bountyAddress, bountyMintTime };
 };
