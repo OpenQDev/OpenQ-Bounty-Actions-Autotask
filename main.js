@@ -11,12 +11,13 @@ const main = async (event) => {
 			'Authorization': event.secrets.GITHUB_BOT_SECRET
 		};
 
-		console.log('event.secrets.GITHUB_BOT_SECRET', event.secrets.GITHUB_BOT_SECRET);
-
 		let baseUrl = null;
 		switch (id) {
 			case '2428d581-5289-40d2-927d-67ab8b58e2eb':
 				baseUrl = 'https://development.openq.dev';
+				break;
+			case '9b6f157e-d6b8-486b-97b8-ba6a0282b235':
+				baseUrl = 'https://staging.openq.dev';
 				break;
 			default:
 				return reject(new Error('Incorrect Environment'));
