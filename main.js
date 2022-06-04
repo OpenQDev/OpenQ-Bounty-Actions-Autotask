@@ -19,6 +19,9 @@ const main = async (event) => {
 			case '9b6f157e-d6b8-486b-97b8-ba6a0282b235':
 				baseUrl = 'https://staging.openq.dev';
 				break;
+			case '691feb17-fc3f-499c-a17b-550b42ba1f9f':
+				baseUrl = 'https://app.openq.dev';
+				break;
 			default:
 				return reject(new Error('Incorrect Environment'));
 		}
@@ -38,6 +41,7 @@ const main = async (event) => {
 			}
 			case 'TokenDepositReceived': {
 				const { tokenAddress, volume, bountyId, bountyAddress } = matchReasons[0].params;
+				console.log('data is', { tokenAddress, volume, bountyId, bountyAddress });
 				result = await axios.post(`${baseUrl}/githubbot/funded`, {
 					bountyId,
 					id: bountyAddress,
