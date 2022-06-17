@@ -1,6 +1,6 @@
 const axios = require('axios');
 const postGithubComment = require('./github-bot');
-const { getBaseUrl } = require('./utils/utils');
+const { getBaseUrl } = require('./utils');
 
 const main = async (event) => {
 	return new Promise(async (resolve, reject) => {
