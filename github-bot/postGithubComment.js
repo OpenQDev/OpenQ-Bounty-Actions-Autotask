@@ -38,6 +38,15 @@ const postGithubComment = async (baseUrl, eventType, githubBotSecret, params) =>
 				}, { headers });
 				return resolve({ bountyId, bountyAddress, tokenAddress, volume });
 			}
+			case 'BountyClosed': {
+				const { bountyId, bountyAddress, closerData } = params;
+				result = await axios.post(`${baseUrl}/githubbot/closed`, {
+					bountyId,
+					id: bountyAddress,
+					closerData
+				}, { headers });
+				return resolve({ bountyId, bountyAddress, closerData });
+			}
 			default: {
 				reject(new Error('Unknown Event'));
 			}
