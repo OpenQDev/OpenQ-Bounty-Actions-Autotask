@@ -3,7 +3,6 @@ const { getBaseUrl } = require('./utils');
 
 const main = async (event) => {
 	return new Promise(async (resolve, reject) => {
-		console.log(event);
 		const payload = event.request.body;
 		const { matchReasons, sentinel } = payload;
 		const { id } = sentinel;
@@ -11,7 +10,8 @@ const main = async (event) => {
 
 		const baseUrl = getBaseUrl(id);
 
-		await postGithubComment(baseUrl, eventType, event.secrets.GITHUB_BOT_SECRET, matchReasons[0].params);
+		const result = await postGithubComment(baseUrl, eventType, event.secrets.GITHUB_BOT_SECRET, matchReasons[0].params);
+		resolve(result);
 	});
 };
 
