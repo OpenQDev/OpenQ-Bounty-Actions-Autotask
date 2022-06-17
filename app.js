@@ -2,17 +2,17 @@ const express = require('express');
 const main = require('./main');
 require('dotenv').config();
 
-const { BountyCreatedEvent } = require('./events/events');
+const { BountyCreated, TokenDepositReceived, DepositRefunded, BountyClosed } = require('./events/events');
 
 const app = express();
 app.use(express.json());
 
 app.post('/', async (req, res) => {
 	try {
-		const result = await main(BountyCreatedEvent);
+		const result = await main(BountyCreated);
 
 		// On local we mimic the return JSON from OpenZeppelin Autotask
-		// The result in production is stringidied, so we do that here
+		// The result in production is stringified, so we do that here
 		// https://docs.openzeppelin.com/defender/autotasks#webhook-handler
 		const autotaskResult = {
 			'autotaskRunId': '37a91eba-9a6a-4404-95e4-38d178ba69ed',

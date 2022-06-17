@@ -2,6 +2,7 @@ const axios = require('axios');
 
 const postGithubComment = async (baseUrl, eventType, githubBotSecret, params) => {
 	return new Promise(async (resolve, reject) => {
+
 		const headers = {
 			'Authorization': githubBotSecret
 		};

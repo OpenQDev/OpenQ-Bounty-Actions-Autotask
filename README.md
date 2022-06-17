@@ -25,14 +25,9 @@ Remove them before push to remote.
 
 ```json
 	"devDependencies": {
-		"axios-mock-adapter": "^1.20.0",
 		"dotenv": "^14.3.2",
-		"ethers": "5.4.1",
 		"express": "^4.17.2",
 		"nodemon": "^2.0.15",
-		"defender-relay-client": "1.11.1",
-		"jest": "^27.4.7",
-		"eslint": "^8.13.0",
-		"eslint-plugin-unused-imports": "^2.0.0"
+		"jest": "^27.4.7"
 	}
 ```

@@ -14,14 +14,13 @@
 	"keywords": [],
 	"author": "",
 	"license": "MIT",
-	"devDependencies": {
-		"axios-mock-adapter": "^1.21.1",
-		"dotenv": "^8.2.0",
-		"jest": "^28.1.1",
-		"nodemon": "^2.0.16"
-	},
 	"dependencies": {
-		"axios": "^0.27.2",
-		"express": "^4.18.1"
+		"axios": "^0.27.2"
+	},
+	"devDependencies": {
+		"dotenv": "^14.3.2",
+		"express": "^4.17.2",
+		"nodemon": "^2.0.15",
+		"jest": "^27.4.7"
 	}
 }
