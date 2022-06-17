@@ -10,10 +10,10 @@ exports.handler = async (event) => {
 };
 
 // To run locally (this code will not be executed in Autotasks)
-// if (require.main === module) {
-// 	require('dotenv').config();
-// 	const { API_KEY: apiKey, API_SECRET: apiSecret } = process.env;
-// 	handler({ apiKey, apiSecret })
-// 		.then(() => process.exit(0))
-// 		.catch((error) => { console.error(error); process.exit(1); });
-// }
+// Local Provider + Contract Setup
+if (require.main === module) {
+	const app = require('./app');
+	const PORT = 8070;
+	app.listen(PORT);
+	console.log(`Open Zeppelin Autotask listening on ${PORT}`);
+}

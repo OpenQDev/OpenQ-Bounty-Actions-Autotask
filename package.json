@@ -5,6 +5,7 @@
 	"main": "dist/index.js",
 	"scripts": {
 		"start": "node index.js",
+		"start:dev": "nodemon index.js",
 		"test": "jest",
 		"push:development": "defender-autotask update-code f07aac12-a5b1-4855-b76e-d82985dd00b8 .",
 		"push:staging": "defender-autotask update-code 830dc02f-2de3-4897-b3f7-b77d8218e28f .",
@@ -15,7 +16,8 @@
 	"license": "MIT",
 	"devDependencies": {
 		"dotenv": "^8.2.0",
-		"jest": "^28.1.1"
+		"jest": "^28.1.1",
+		"nodemon": "^2.0.16"
 	},
 	"dependencies": {
 		"axios": "^0.27.2",

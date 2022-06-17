@@ -1,15 +1,14 @@
-const postGithubComment = async (eventType) => {
+const axios = require('axios');
+
+const postGithubComment = async (baseUrl, eventType, githubBotSecret, params) => {
 	const headers = {
-		'Authorization': event.secrets.GITHUB_BOT_SECRET
+		'Authorization': githubBotSecret
 	};
 
 	let result = null;
 	switch (eventType) {
 		case 'BountyCreated': {
-			const { bountyId, organization, issuerAddress, bountyAddress, bountyMintTime } = matchReasons[0].params;
-			const headers = {
-				'Authorization': event.secrets.GITHUB_BOT_SECRET
-			};
+			const { bountyId, organization, issuerAddress, bountyAddress, bountyMintTime } = params;
 			result = await axios.post(`${baseUrl}/githubbot/created`, {
 				bountyId,
 				id: bountyAddress
@@ -17,8 +16,7 @@ const postGithubComment = async (eventType) => {
 			return resolve({ bountyId, organization, issuerAddress, bountyAddress, bountyMintTime });
 		}
 		case 'TokenDepositReceived': {
-			const { tokenAddress, volume, bountyId, bountyAddress } = matchReasons[0].params;
-			console.log('data is', { tokenAddress, volume, bountyId, bountyAddress });
+			const { tokenAddress, volume, bountyId, bountyAddress } = params;
 			result = await axios.post(`${baseUrl}/githubbot/funded`, {
 				bountyId,
 				id: bountyAddress,
