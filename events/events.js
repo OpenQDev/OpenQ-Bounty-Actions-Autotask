@@ -37,10 +37,8 @@ const TokenDepositReceived = {
 					params: {
 						bountyId: "I_kwDOGWnnz85L2NI_",
 						id: "0x94e09468616365256F11F4544e65cE0C70ee624b",
-						deposit: {
-							tokenAddress: "0x43209468616365256F11F4544e65cE0C70ee624b",
-							tokenVolumes: 1000
-						}
+						tokenAddress: "0x43209468616365256F11F4544e65cE0C70ee624b",
+						tokenVolumes: 1000
 					},
 					signature: "TokenDepositReceived(bytes32,indexed address,string,string,address,uint256,address,uint256,uint256)"
 				}
@@ -52,4 +50,28 @@ const TokenDepositReceived = {
 	}
 };
 
-module.exports = { BountyCreated, TokenDepositReceived };
+const DepositRefunded = {
+	request: {
+		body: {
+			sentinel: {
+				id: STAGING_SENTINEL_ID
+			},
+			matchReasons: [
+				{
+					params: {
+						bountyId: "I_kwDOGWnnz85L2NI_",
+						id: "0x94e09468616365256F11F4544e65cE0C70ee624b",
+						tokenAddress: "0x43209468616365256F11F4544e65cE0C70ee624b",
+						tokenVolumes: 1000
+					},
+					signature: "DepositRefunded(bytes32,string,indexed address,string,uint256,address,uint256)"
+				}
+			]
+		}
+	},
+	secrets: {
+		GITHUB_BOT_SECRET: process.env.GITHUB_BOT_SECRET
+	}
+};
+
+module.exports = { BountyCreated, TokenDepositReceived, DepositRefunded };

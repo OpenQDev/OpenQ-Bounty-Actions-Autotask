@@ -29,12 +29,14 @@ const postGithubComment = async (baseUrl, eventType, githubBotSecret, params) =>
 				return resolve({ tokenAddress, volume, bountyId, bountyAddress });
 			}
 			case 'DepositRefunded': {
-				const { bountyId, bountyAddress } = matchReasons[0].params;
+				const { bountyId, bountyAddress, tokenAddress, volume } = params;
 				result = await axios.post(`${baseUrl}/githubbot/refunded`, {
 					bountyId,
-					id: bountyAddress
+					id: bountyAddress,
+					tokenAddress,
+					volume
 				}, { headers });
-				return resolve({ bountyId, bountyAddress });
+				return resolve({ bountyId, bountyAddress, tokenAddress, volume });
 			}
 			default: {
 				reject(new Error('Unknown Event'));
