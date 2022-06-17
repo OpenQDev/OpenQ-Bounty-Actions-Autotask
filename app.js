@@ -2,7 +2,7 @@ const express = require('express');
 const main = require('./main');
 require('dotenv').config();
 
-const { BountyCreatedEvent } = require('./data');
+const { BountyCreatedEvent } = require('./events/events');
 
 const app = express();
 app.use(express.json());
