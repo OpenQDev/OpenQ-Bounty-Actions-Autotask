@@ -22,7 +22,8 @@ const BountyCreated = {
 		}
 	},
 	secrets: {
-		GITHUB_BOT_SECRET: process.env.GITHUB_BOT_SECRET
+		GITHUB_BOT_SECRET: process.env.GITHUB_BOT_SECRET,
+		OPENQ_API_SECRET: process.env.OPENQ_API_SECRET
 	}
 };
 
@@ -46,7 +47,8 @@ const TokenDepositReceived = {
 		}
 	},
 	secrets: {
-		GITHUB_BOT_SECRET: process.env.GITHUB_BOT_SECRET
+		GITHUB_BOT_SECRET: process.env.GITHUB_BOT_SECRET,
+		OPENQ_API_SECRET: process.env.OPENQ_API_SECRET
 	}
 };
 
@@ -70,7 +72,8 @@ const DepositRefunded = {
 		}
 	},
 	secrets: {
-		GITHUB_BOT_SECRET: process.env.GITHUB_BOT_SECRET
+		GITHUB_BOT_SECRET: process.env.GITHUB_BOT_SECRET,
+		OPENQ_API_SECRET: process.env.OPENQ_API_SECRET
 	}
 };
 
@@ -93,7 +96,8 @@ const BountyClosed = {
 		}
 	},
 	secrets: {
-		GITHUB_BOT_SECRET: process.env.GITHUB_BOT_SECRET
+		GITHUB_BOT_SECRET: process.env.GITHUB_BOT_SECRET,
+		OPENQ_API_SECRET: process.env.OPENQ_API_SECRET
 	}
 };
 
