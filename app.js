@@ -2,14 +2,16 @@ const express = require('express');
 const main = require('./main');
 require('dotenv').config();
 
-const { BountyCreated, TokenDepositReceived, DepositRefunded, BountyClosed } = require('./events/events');
+const events = require('./events/events');
 
 const app = express();
 app.use(express.json());
 
 app.post('/', async (req, res) => {
+	const event = req.query.event;
+
 	try {
-		const result = await main(BountyCreated);
+		const result = await main(events[event]);
 
 		// On local we mimic the return JSON from OpenZeppelin Autotask
 		// The result in production is stringified, so we do that here

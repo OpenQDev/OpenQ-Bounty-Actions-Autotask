@@ -97,4 +97,4 @@ const BountyClosed = {
 	}
 };
 
-module.exports = { BountyCreated, TokenDepositReceived, DepositRefunded };
+module.exports = { BountyCreated, TokenDepositReceived, DepositRefunded, BountyClosed };
