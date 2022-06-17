@@ -17,11 +17,11 @@ PRODUCTION
 defender-autotask update-code <AUTOTASK_ID_PRODUCTION> .
 ```
 
-Running Locally
+## Running Locally
+
+Step 1: Re-Add Dev Dependencies to `package.json`
 
 Due to body size limits on OZ tasks, the following dev deps are only needed for local development, but cannot be included in the `node_modules/` folder at the time of pushing code.
-
-Remove them before push to remote.
 
 ```json
 	"devDependencies": {
@@ -31,3 +31,11 @@ Remove them before push to remote.
 		"jest": "^27.4.7"
 	}
 ```
+
+Step 2: Install Dependencies
+
+`yarn`
+
+Step 3: Start
+
+`yarn start:dev`
