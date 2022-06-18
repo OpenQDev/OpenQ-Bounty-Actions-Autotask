@@ -15,14 +15,14 @@ const bountyUpdater = async (eventType, baseUrl, openqApiSecret, params) => {
 			let result = null;
 			switch (eventType) {
 				case 'BountyCreated':
-					const { bountyAddress, organization } = params;
-					result = await createNewBounty(baseUrl, openqApiSecret, bountyAddress, organization);
-					return resolve({ bountyAddress, organization });
+					const { bountyAddress, bountyId, organization } = params;
+					console.log(params);
+					result = await createNewBounty(baseUrl, openqApiSecret, bountyAddress, bountyId, organization);
+					return resolve({ bountyAddress, bountyId, organization });
 				default: {
 					reject(new Error('Unknown Event'));
 				}
 			}
-			const openqApiResult = await createNewBounty();
 		} catch (error) {
 			reject(error);
 		}

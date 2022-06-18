@@ -1,5 +1,4 @@
 const axios = require('axios');
-const main = require('../main');
 
 const postGithubComment = require('../github-bot/postGithubComment');
 
