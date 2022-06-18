@@ -15,5 +15,5 @@ if (require.main === module) {
 	const app = require('./app');
 	const PORT = 8070;
 	app.listen(PORT);
-	console.log(`Open Zeppelin Autotask listening on ${PORT}`);
+	console.log(`Open Zeppelin Autotask listening on http://localhost:${PORT}`);
 }

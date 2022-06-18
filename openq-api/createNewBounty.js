@@ -17,7 +17,6 @@ const createNewBounty = async (baseUrl, openqApiSecret, address, bountyId, organ
 						},
 					}
 				);
-			console.log(result.data);
 			return resolve(result.data);
 		} catch (error) {
 			return reject(error);
