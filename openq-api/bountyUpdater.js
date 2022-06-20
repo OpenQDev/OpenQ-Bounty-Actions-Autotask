@@ -16,7 +16,7 @@ const bountyUpdater = async (eventType, baseUrl, openqApiSecret, params) => {
 			switch (eventType) {
 				case 'BountyCreated':
 					const { bountyAddress, bountyId, organization } = params;
-					console.log(params);
+					console.log('openqApiSecret', openqApiSecret);
 					result = await createNewBounty(baseUrl, openqApiSecret, bountyAddress, bountyId, organization);
 					return resolve({ bountyAddress, bountyId, organization });
 				default: {
