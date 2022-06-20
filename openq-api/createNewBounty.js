@@ -6,7 +6,7 @@ const createNewBounty = async (baseUrl, openqApiSecret, address, bountyId, organ
 		try {
 			const result = await axios
 				.post(
-					`${baseUrl}/api`,
+					`${baseUrl}/graphql`,
 					{
 						query: CREATE_NEW_BOUNTY,
 						variables: { address, bountyId, organizationId },

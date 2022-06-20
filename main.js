@@ -11,8 +11,12 @@ const main = async (event) => {
 		const baseUrl = getBaseUrl(id);
 
 		// const githubBotResult = await postGithubComment(baseUrl, eventType, event.secrets.GITHUB_BOT_SECRET, matchReasons[0].params);
-		const openQApiResult = await bountyUpdater(eventType, baseUrl, event.secrets.OPENQ_API_SECRET, matchReasons[0].params);
-		resolve({ openQApiResult });
+		try {
+			const openQApiResult = await bountyUpdater(eventType, baseUrl, event.secrets.OPENQ_API_SECRET, matchReasons[0].params);
+			resolve({ openQApiResult });
+		} catch (error) {
+			reject(error);
+		}
 	});
 };
 
