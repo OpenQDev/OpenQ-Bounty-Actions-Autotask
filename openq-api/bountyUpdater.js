@@ -14,7 +14,6 @@ const {ethers } = require("ethers")
 const bountyUpdater = async (eventType, baseUrl, openqApiSecret, params) => {
 	return new Promise(async (resolve, reject) => {
 		try {
-console.log( params)
 			let result = null;
 			switch (eventType) {
 				case 'BountyCreated':{
@@ -29,12 +28,12 @@ console.log( params)
 				case 'TokenDepositReceived':{
 				const { volume, tokenAddress, bountyAddress } = params;
 				try {
-						result = await addToBounty(baseUrl, openqApiSecret,{volume: parseFloat(ethers.utils.formatUnits(volume)), tokenAddress}, bountyAddress, true);
+						result = await addToBounty(baseUrl, openqApiSecret,{volume: parseFloat(ethers.utils.formatUnits(volume, 0)), tokenAddress}, bountyAddress, true);
 					} catch (error) {
 						console.error('error creating new bounty', JSON.stringify(error));
 						reject(new Error('Unknown Event'));
 					}
-					return resolve({volume: ethers.utils.formatUnits(volume), tokenAddress, bountyAddress});
+					return resolve({volume: ethers.utils.formatUnits(volume, 0), tokenAddress, bountyAddress});
 					}
 				default: {
 					reject(new Error('Unknown Event'));

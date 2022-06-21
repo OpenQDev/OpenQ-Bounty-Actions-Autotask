@@ -10,7 +10,6 @@ const CREATE_BOUNTY = `
 			organizationId: $organizationId
 		) {
 			address
-			add
 			bountyId
 			organizationId
 		}

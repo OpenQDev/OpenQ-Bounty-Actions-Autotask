@@ -4,7 +4,6 @@ const axios = require('axios');
 const addToBounty = async (baseUrl, openqApiSecret,  tokenBalance, address, add) => {
 	return new Promise(async (resolve, reject) => {
 		try {
-console.log(baseUrl, openqApiSecret, tokenBalance, address, add)
 			const result = await axios
 				.post(
 					`${baseUrl}/graphql`,
