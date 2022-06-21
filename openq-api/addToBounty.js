@@ -1,15 +1,16 @@
-const { CREATE_BOUNTY } = require('./graphql');
+const { ADD_TO_BOUNTY } = require('./graphql');
 const axios = require('axios');
 
-const createNewBounty = async (baseUrl, openqApiSecret, address, bountyId, organizationId) => {
+const addToBounty = async (baseUrl, openqApiSecret,  tokenBalance, address, add) => {
 	return new Promise(async (resolve, reject) => {
 		try {
+console.log(baseUrl, openqApiSecret, tokenBalance, address, add)
 			const result = await axios
 				.post(
 					`${baseUrl}/graphql`,
 					{
-						query: CREATE_BOUNTY,
-						variables: { address, bountyId, organizationId },
+						query: ADD_TO_BOUNTY,
+						variables: { address, tokenBalance, add },
 					},
 					{
 						headers: {
@@ -24,4 +25,4 @@ const createNewBounty = async (baseUrl, openqApiSecret, address, bountyId, organ
 	});
 };
 
-module.exports = createNewBounty;
+module.exports = addToBounty;
