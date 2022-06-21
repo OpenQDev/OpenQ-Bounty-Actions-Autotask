@@ -90,7 +90,7 @@ const BountyClosed = {
 						bountyAddress: "0x94e09468616365256F11F4544e65cE0C70ee624b",
 						closerData: "https://github.com/OpenQDev/OpenQ-TestRepo/pull/364"
 					},
-					signature: "DepositRefunded(bytes32,string,indexed address,string,uint256,address,uint256)"
+					signature: "BountyClosed(string,address,string,address,uint256,string)"
 				}
 			]
 		}
