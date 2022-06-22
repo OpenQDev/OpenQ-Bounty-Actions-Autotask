@@ -8,9 +8,9 @@ const getBaseUrl = (autotaskId) => {
 		case LOCAL_EVENT_LISTENER_ID:
 			return 'http://openq-api:4000';
 		case STAGING_SENTINEL_ID:
-			return 'https://staging.openq.dev';
+			return 'https://staging.openq.dev/api';
 		case PRODUCTION_SENTINEL_ID:
-			return 'https://app.openq.dev';
+			return 'https://app.openq.dev/api';
 		default:
 			return reject(new Error('Incorrect Environment'));
 	}

@@ -10,13 +10,19 @@ const main = async (event) => {
 		const eventType = matchReasons[0].signature.replace(/ *\([^)]*\) */g, "");
 		const baseUrl = getBaseUrl(id);
 
-		// const githubBotResult = await postGithubComment(baseUrl, eventType, event.secrets.GITHUB_BOT_SECRET, matchReasons[0].params);
+		try {
+			const githubBotResult = await postGithubComment(baseUrl, eventType, event.secrets.GITHUB_BOT_SECRET, matchReasons[0].params);
+		} catch (error) {
+			console.error(error);
+		}
+
 		try {
 			const openQApiResult = await bountyUpdater(eventType, baseUrl, event.secrets.OPENQ_API_SECRET, matchReasons[0].params);
-			resolve({ openQApiResult });
 		} catch (error) {
 			reject(error);
 		}
+
+		resolve({ openQApiResult });
 	});
 };
 

@@ -16,7 +16,7 @@ describe('bountyUpdater', () => {
 		});
 
 		// ACT
-		await bountyUpdater('BountyCreated', 'https://staging.openq.dev', 'apiSecret123', { bountyAddress: "0xaddress", bountyId: 'bountyId123', organization: 'orgId123' });
+		await bountyUpdater('BountyCreated', 'https://staging.openq.dev/api', 'apiSecret123', { bountyAddress: "0xaddress", bountyId: 'bountyId123', organization: 'orgId123' });
 
 		// ASSERT
 		const url = mockPost.mock.calls[0][0];
@@ -24,7 +24,7 @@ describe('bountyUpdater', () => {
 		const { bountyId, address, organizationId } = mockPost.mock.calls[0][1].variables;
 		const { headers } = mockPost.mock.calls[0][2];
 
-		expect(url).toEqual('https://staging.openq.dev/api');
+		expect(url).toEqual('https://staging.openq.dev/api/graphql');
 		expect(bountyId).toEqual('bountyId123');
 		expect(address).toEqual('0xaddress');
 		expect(organizationId).toEqual('orgId123');
