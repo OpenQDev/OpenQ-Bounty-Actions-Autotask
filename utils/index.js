@@ -16,4 +16,32 @@ const getBaseUrl = (autotaskId) => {
 	}
 };
 
-module.exports = { getBaseUrl, STAGING_SENTINEL_ID, PRODUCTION_SENTINEL_ID };
+const getOpenQApiSecret = (autotaskId, event) => {
+	let baseUrl = null;
+	switch (autotaskId) {
+		case LOCAL_EVENT_LISTENER_ID:
+			return event.secrets.OPENQ_API_SECRET;
+		case STAGING_SENTINEL_ID:
+			return event.secrets.OPENQ_API_SECRET_STAGING;
+		case PRODUCTION_SENTINEL_ID:
+			return event.secrets.OPENQ_API_SECRET_PRODUCTION;
+		default:
+			return reject(new Error('Incorrect Environment'));
+	}
+};
+
+const getGithubBotSecret = (autotaskId, event) => {
+	let baseUrl = null;
+	switch (autotaskId) {
+		case LOCAL_EVENT_LISTENER_ID:
+			return event.secrets.GITHUB_BOT_SECRET;
+		case STAGING_SENTINEL_ID:
+			return event.secrets.GITHUB_BOT_SECRET_STAGING;
+		case PRODUCTION_SENTINEL_ID:
+			return event.secrets.GITHUB_BOT_SECRET_PRODUCTION;
+		default:
+			return reject(new Error('Incorrect Environment'));
+	}
+};
+
+module.exports = { getBaseUrl, getOpenQApiSecret, getGithubBotSecret, STAGING_SENTINEL_ID, PRODUCTION_SENTINEL_ID };
