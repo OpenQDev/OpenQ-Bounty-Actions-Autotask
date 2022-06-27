@@ -12,7 +12,7 @@ const postGithubComment = async (baseUrl, eventType, githubBotSecret, params) =>
 			switch (eventType) {
 				case 'BountyCreated': {
 					const { bountyId, organization, issuerAddress, bountyAddress, bountyMintTime } = params;
-					result = await axios.post(`${baseUrl}/githubbot/created`, {
+					result = await axios.post(`${baseUrl}/created`, {
 						bountyId,
 						id: bountyAddress
 					}, { headers });
@@ -20,7 +20,8 @@ const postGithubComment = async (baseUrl, eventType, githubBotSecret, params) =>
 				}
 				case 'TokenDepositReceived': {
 					const { tokenAddress, volume, bountyId, bountyAddress } = params;
-					result = await axios.post(`${baseUrl}/githubbot/funded`, {
+					console.log(baseUrl)
+					result = await axios.post(`${baseUrl}/funded`, {
 						bountyId,
 						id: bountyAddress,
 						deposit: {
@@ -32,7 +33,7 @@ const postGithubComment = async (baseUrl, eventType, githubBotSecret, params) =>
 				}
 				case 'DepositRefunded': {
 					const { bountyId, bountyAddress, tokenAddress, volume } = params;
-					result = await axios.post(`${baseUrl}/githubbot/refunded`, {
+					result = await axios.post(`${baseUrl}/refunded`, {
 						bountyId,
 						id: bountyAddress,
 						tokenAddress,
@@ -42,7 +43,7 @@ const postGithubComment = async (baseUrl, eventType, githubBotSecret, params) =>
 				}
 				case 'BountyClosed': {
 					const { bountyId, bountyAddress, closerData } = params;
-					result = await axios.post(`${baseUrl}/githubbot/closed`, {
+					result = await axios.post(`${baseUrl}/closed`, {
 						bountyId,
 						id: bountyAddress,
 						closerData

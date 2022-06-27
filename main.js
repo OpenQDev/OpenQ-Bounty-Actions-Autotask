@@ -1,4 +1,4 @@
-const { getBaseUrl, getOpenQApiSecret, getGithubBotSecret } = require('./utils');
+const { getBaseUrl, getBotUrl, getOpenQApiSecret, getGithubBotSecret } = require('./utils');
 const postGithubComment = require('./github-bot/postGithubComment');
 const bountyUpdater = require('./openq-api/bountyUpdater');
 
@@ -9,14 +9,15 @@ const main = async (event) => {
 		const { id } = sentinel;
 		const eventType = matchReasons[0].signature.replace(/ *\([^)]*\) */g, "");
 		const baseUrl = getBaseUrl(id);
-		//const botUrl = getBotUrl(id);
+		const botUrl = getBotUrl(id);
 		const openqApiSecret = getOpenQApiSecret(id, event);
 		const githubBotSecret = getGithubBotSecret(id, event);
 		let openQApiResult;
+		let githubBotResult
 
 		try {
-			//const githubBotResult = await postGithubComment(botUrl, eventType, githubBotSecret, matchReasons[0].params);
-		} catch (error) {
+			githubBotResult = await postGithubComment(botUrl, eventType, githubBotSecret, matchReasons[0].params);
+			} catch (error) {
 			console.error(error);
 		}
 
@@ -26,7 +27,7 @@ const main = async (event) => {
 			reject(error);
 		}
 
-		resolve({ openQApiResult });
+		resolve({ openQApiResult, githubBotResult });
 	});
 };
 
