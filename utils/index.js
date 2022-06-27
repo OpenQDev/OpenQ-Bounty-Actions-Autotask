@@ -44,7 +44,6 @@ const getOpenQApiSecret = (autotaskId, event) => {
 };
 
 const getGithubBotSecret = (autotaskId, event) => {
-console.log(event.secrets.GITHUB_BOT_SECRET)
 	let baseUrl = null;
 	switch (autotaskId) {
 		case LOCAL_EVENT_LISTENER_ID:

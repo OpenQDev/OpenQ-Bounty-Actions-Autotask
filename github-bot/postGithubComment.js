@@ -20,7 +20,6 @@ const postGithubComment = async (baseUrl, eventType, githubBotSecret, params) =>
 				}
 				case 'TokenDepositReceived': {
 					const { tokenAddress, volume, bountyId, bountyAddress } = params;
-					console.log(baseUrl)
 					result = await axios.post(`${baseUrl}/funded`, {
 						bountyId,
 						id: bountyAddress,
