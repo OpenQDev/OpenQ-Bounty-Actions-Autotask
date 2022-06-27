@@ -47,7 +47,7 @@ const getGithubBotSecret = (autotaskId, event) => {
 	let baseUrl = null;
 	switch (autotaskId) {
 		case LOCAL_EVENT_LISTENER_ID:
-			return process.env.GITHUB_BOT_SECRET;
+			return event.secrets.GITHUB_BOT_SECRET;
 		case STAGING_SENTINEL_ID:
 			return event.secrets.GITHUB_BOT_SECRET_STAGING;
 		case PRODUCTION_SENTINEL_ID:
