@@ -16,6 +16,19 @@ const getBaseUrl = (autotaskId) => {
 	}
 };
 
+const getBotUrl = (autotaskId) => {
+	switch (autotaskId) {
+		case LOCAL_EVENT_LISTENER_ID:
+			return 'http://openq-bot:3006';
+		case STAGING_SENTINEL_ID:
+			return 'https://staging.openq.dev/api';
+		case PRODUCTION_SENTINEL_ID:
+			return 'https://app.openq.dev/api';
+		default:
+			return reject(new Error('Incorrect Environment'));
+	}
+};
+
 const getOpenQApiSecret = (autotaskId, event) => {
 	let baseUrl = null;
 	switch (autotaskId) {
@@ -44,4 +57,4 @@ const getGithubBotSecret = (autotaskId, event) => {
 	}
 };
 
-module.exports = { getBaseUrl, getOpenQApiSecret, getGithubBotSecret, STAGING_SENTINEL_ID, PRODUCTION_SENTINEL_ID };
+module.exports = { getBaseUrl, getBotUrl, getOpenQApiSecret, getGithubBotSecret, STAGING_SENTINEL_ID, PRODUCTION_SENTINEL_ID };
