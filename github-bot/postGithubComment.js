@@ -47,8 +47,8 @@ const postGithubComment = async (baseUrl, eventType, githubBotSecret, params) =>
 						id: bountyAddress,
 						closerData
 					}, { headers });
-					return resolve({ bountyId, bountyAddress, closerData });
-				}
+					return resolve({ bountyId, bountyAddress, closerData });}
+				
 				default: {
 					reject(new Error('Unknown Event'));
 				}

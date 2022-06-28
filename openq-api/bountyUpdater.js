@@ -46,6 +46,9 @@ const bountyUpdater = async (eventType, baseUrl, openqApiSecret, params) => {
 					}
 					return resolve({ volume: ethers.utils.formatUnits(volume, 0), tokenAddress, bountyAddress });
 				}
+				case 'BountyClosed': {
+					resolve({});
+				}
 				default: {
 					reject(new Error('Unknown Event'));
 				}
