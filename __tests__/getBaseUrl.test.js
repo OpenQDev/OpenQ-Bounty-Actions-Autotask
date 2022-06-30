@@ -1,4 +1,4 @@
-const { getBaseUrl, STAGING_SENTINEL_ID, PRODUCTION_SENTINEL_ID } = require('../utils');
+const { getBaseUrl, STAGING_SENTINEL_ID, PRODUCTION_SENTINEL_ID, LOCAL_EVENT_LISTENER_ID } = require('../utils');
 
 describe('getBaseUrl', () => {
 	it('returns correct base url for each environment', () => {
@@ -7,5 +7,8 @@ describe('getBaseUrl', () => {
 
 		const productionBaseUrl = getBaseUrl(PRODUCTION_SENTINEL_ID);
 		expect(productionBaseUrl).toEqual('https://app.openq.dev/api');
+
+		const localBaseUrl = getBaseUrl(LOCAL_EVENT_LISTENER_ID);
+		expect(localBaseUrl).toEqual('http://openq-api:4000');
 	});
 });

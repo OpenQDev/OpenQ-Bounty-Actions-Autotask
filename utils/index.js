@@ -57,4 +57,4 @@ const getGithubBotSecret = (autotaskId, event) => {
 	}
 };
 
-module.exports = { getBaseUrl, getBotUrl, getOpenQApiSecret, getGithubBotSecret, STAGING_SENTINEL_ID, PRODUCTION_SENTINEL_ID };
+module.exports = { getBaseUrl, getBotUrl, getOpenQApiSecret, getGithubBotSecret, STAGING_SENTINEL_ID, PRODUCTION_SENTINEL_ID, LOCAL_EVENT_LISTENER_ID };
