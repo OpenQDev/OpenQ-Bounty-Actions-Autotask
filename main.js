@@ -25,7 +25,7 @@ const main = async (event) => {
 		try {
 			githubBotResult = await postGithubComment(botUrl, eventType, githubBotSecret, matchReasons[0].params);
 		} catch (error) {
-			console.error(error);
+			console.error(error.response.data.errors);
 		}
 
 		resolve({ openQApiResult, githubBotResult });

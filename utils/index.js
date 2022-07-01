@@ -21,9 +21,9 @@ const getBotUrl = (autotaskId) => {
 		case LOCAL_EVENT_LISTENER_ID:
 			return 'http://openq-bot:3006';
 		case STAGING_SENTINEL_ID:
-			return 'https://staging.openq.dev/api';
+			return 'https://staging.openq.dev/githubbot';
 		case PRODUCTION_SENTINEL_ID:
-			return 'https://app.openq.dev/api';
+			return 'https://app.openq.dev/githubbot';
 		default:
 			return reject(new Error('Incorrect Environment'));
 	}
