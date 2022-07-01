@@ -13,18 +13,19 @@ const main = async (event) => {
 		const openqApiSecret = getOpenQApiSecret(id, event);
 		const githubBotSecret = getGithubBotSecret(id, event);
 		let openQApiResult;
-		let githubBotResult
-
-		try {
-			githubBotResult = await postGithubComment(botUrl, eventType, githubBotSecret, matchReasons[0].params);
-			} catch (error) {
-			console.error(error);
-		}
+		let githubBotResult;
 
 		try {
 			openQApiResult = await bountyUpdater(eventType, baseUrl, openqApiSecret, matchReasons[0].params);
+			console.log(openQApiResult);
 		} catch (error) {
 			reject(error);
+		}
+
+		try {
+			githubBotResult = await postGithubComment(botUrl, eventType, githubBotSecret, matchReasons[0].params);
+		} catch (error) {
+			console.error(error);
 		}
 
 		resolve({ openQApiResult, githubBotResult });
