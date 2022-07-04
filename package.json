@@ -8,7 +8,8 @@
 		"start:dev": "nodemon index.js",
 		"test": "jest",
 		"push:staging": "defender-autotask update-code 830dc02f-2de3-4897-b3f7-b77d8218e28f .",
-		"push:production": "defender-autotask update-code 29674807-44c9-4ec9-9e02-3768d4f01be5 ."
+		"push:production": "defender-autotask update-code 29674807-44c9-4ec9-9e02-3768d4f01be5 .",
+		"push:bcnhack": "defender-autotask update-code d9024fa0-ab8b-4a12-b0bd-f616dd51bef5 ."
 	},
 	"keywords": [],
 	"author": "",
