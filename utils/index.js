@@ -11,8 +11,6 @@ const getBaseUrl = (autotaskId) => {
 			return 'https://staging.openq.dev/api';
 		case PRODUCTION_SENTINEL_ID:
 			return 'https://app.openq.dev/api';
-		case BCNHACK_SENTINEL_ID:
-			return 'https://bcnhack.openq.dev/api';
 		default:
 			return reject(new Error('Incorrect Environment'));
 	}
@@ -40,8 +38,6 @@ const getOpenQApiSecret = (autotaskId, event) => {
 			return event.secrets.OPENQ_API_SECRET_STAGING;
 		case PRODUCTION_SENTINEL_ID:
 			return event.secrets.OPENQ_API_SECRET_PRODUCTION;
-		case BCNHACK_SENTINEL_ID:
-			return event.secrets.OPENQ_API_SECRET_BCNHACK;
 		default:
 			return reject(new Error('Incorrect Environment'));
 	}
@@ -56,8 +52,6 @@ const getGithubBotSecret = (autotaskId, event) => {
 			return event.secrets.GITHUB_BOT_SECRET_STAGING;
 		case PRODUCTION_SENTINEL_ID:
 			return event.secrets.GITHUB_BOT_SECRET_PRODUCTION;
-		case BCNHACK_SENTINEL_ID:
-			return event.secrets.GITHUB_BOT_SECRET_BCNHACK;
 		default:
 			return reject(new Error('Incorrect Environment'));
 	}
