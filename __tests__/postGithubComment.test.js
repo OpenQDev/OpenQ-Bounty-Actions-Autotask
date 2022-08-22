@@ -17,7 +17,7 @@ describe('postGithubComment', () => {
 
 		// ACT
 		await postGithubComment(
-			'https://staging.openq.dev',
+			'https://staging.openq.dev/githubbot',
 			'BountyCreated',
 			'githubBotSecret123',
 			{
@@ -50,7 +50,7 @@ describe('postGithubComment', () => {
 
 		// ACT
 		await postGithubComment(
-			'https://staging.openq.dev',
+			'https://staging.openq.dev/githubbot',
 			'TokenDepositReceived',
 			'githubBotSecret123',
 			{
@@ -85,7 +85,7 @@ describe('postGithubComment', () => {
 
 		// ACT
 		await postGithubComment(
-			'https://staging.openq.dev',
+			'https://staging.openq.dev/githubbot',
 			'BountyClosed',
 			'githubBotSecret123',
 			{
