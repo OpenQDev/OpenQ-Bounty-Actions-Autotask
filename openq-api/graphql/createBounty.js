@@ -3,15 +3,20 @@ const CREATE_BOUNTY = `
 		$address: String!
 		$bountyId: String!
 		$organizationId: String!
+		$type: String!
+		$category: String
 	) {
 		createBounty(
 			address: $address
 			bountyId: $bountyId
 			organizationId: $organizationId
+			type: $type
+			category: $category
 		) {
 			address
 			bountyId
 			organizationId
+			category
 		}
 	}
 `;
