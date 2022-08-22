@@ -22,13 +22,13 @@ const main = async (event) => {
 			reject(error);
 		}
 
-		try {
-			githubBotResult = await postGithubComment(botUrl, eventType, githubBotSecret, matchReasons[0].params);
-		} catch (error) {
-			console.error(error.response.data.errors);
-		}
+		// try {
+		// 	githubBotResult = await postGithubComment(botUrl, eventType, githubBotSecret, matchReasons[0].params);
+		// } catch (error) {
+		// 	console.error(error.response.data.errors);
+		// }
 
-		resolve({ openQApiResult, githubBotResult });
+		resolve({ openQApiResult });
 	});
 };
 

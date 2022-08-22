@@ -16,7 +16,6 @@ const CREATE_BOUNTY = `
 			address
 			bountyId
 			organizationId
-			category
 		}
 	}
 `;
