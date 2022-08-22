@@ -17,12 +17,12 @@ const bountyUpdater = async (eventType, baseUrl, openqApiSecret, params) => {
 			let result = null;
 			switch (eventType) {
 				case 'BountyCreated': {
-					const { bountyAddress, bountyId, organization } = params;
+					const { bountyAddress, bountyId, organization, bountyType } = params;
 					try {
-						result = await createNewBounty(baseUrl, openqApiSecret, bountyAddress, bountyId, organization);
+						result = await createNewBounty(baseUrl, openqApiSecret, bountyAddress, bountyId, organization, bountyType);
 					} catch (error) {
 						console.error('error creating new bounty', JSON.stringify(error));
-						reject(new Error('Unknown Event'));
+						reject(new Error('ERROR CREATING NEW BOUNTY'));
 					}
 					return resolve({ bountyAddress, bountyId, organization });
 				}
@@ -32,7 +32,7 @@ const bountyUpdater = async (eventType, baseUrl, openqApiSecret, params) => {
 						result = await addToBounty(baseUrl, openqApiSecret, { volume: parseFloat(ethers.utils.formatUnits(volume, 0)), tokenAddress }, bountyAddress, true);
 					} catch (error) {
 						console.error('error creating new bounty', JSON.stringify(error));
-						reject(new Error('Unknown Event'));
+						reject(new Error('ERROR UPDATING BOUNTY'));
 					}
 					return resolve({ volume: ethers.utils.formatUnits(volume, 0), tokenAddress, bountyAddress });
 				}
@@ -41,7 +41,7 @@ const bountyUpdater = async (eventType, baseUrl, openqApiSecret, params) => {
 					try {
 						result = await addToBounty(baseUrl, openqApiSecret, { volume: parseFloat(ethers.utils.formatUnits(volume, 0)), tokenAddress }, bountyAddress, false);
 					} catch (error) {
-						console.error('error creating new bounty', JSON.stringify(error));
+						console.error('ERROR UPDATING BOUNTY', JSON.stringify(error));
 						reject(new Error('Unknown Event'));
 					}
 					return resolve({ volume: ethers.utils.formatUnits(volume, 0), tokenAddress, bountyAddress });
