@@ -21,7 +21,8 @@ Due to body size limits on OZ tasks, the following dev deps are only needed for 
 		"dotenv": "^14.3.2",
 		"express": "^4.17.2",
 		"jest": "^27.4.7",
-		"nodemon": "^2.0.15"
+		"nodemon": "^2.0.15",
+		"ethers": "^5.7.0"
 	}
 ```
 
