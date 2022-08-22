@@ -16,7 +16,7 @@ const BountyCreated = {
 						bountyAddress: "0x94e09468616365256F11F4544e65cE0C70ee624b",
 						bountyMintTime: 143434343
 					},
-					signature: "BountyCreated(string,string,address,indexed address,uint256)"
+					signature: "BountyCreated(string,string,address,address,uint256,uint256,bytes,uint256)"
 				}
 			]
 		}
@@ -41,7 +41,7 @@ const TokenDepositReceived = {
 						tokenAddress: "0x43209468616365256F11F4544e65cE0C70ee624b",
 						volume: 1000
 					},
-					signature: "TokenDepositReceived(bytes32,indexed address,string,string,address,uint256,address,uint256,uint256)"
+					signature: "TokenDepositReceived(bytes32,address,string,string,address,uint256,address,uint256,uint256,uint256,bytes,uint256)"
 				}
 			]
 		}
@@ -66,7 +66,7 @@ const DepositRefunded = {
 						tokenAddress: "0x43209468616365256F11F4544e65cE0C70ee624b",
 						volume: 1000
 					},
-					signature: "DepositRefunded(bytes32,string,indexed address,string,uint256,address,uint256)"
+					signature: "DepositRefunded(bytes32,string,address,string,uint256,address,uint256,uint256,bytes,uint256)"
 				}
 			]
 		}
@@ -90,7 +90,7 @@ const BountyClosed = {
 						bountyAddress: "0x94e09468616365256F11F4544e65cE0C70ee624b",
 						closerData: "https://github.com/OpenQDev/OpenQ-TestRepo/pull/364"
 					},
-					signature: "BountyClosed(string,address,string,address,uint256,string)"
+					signature: "BountyClosed(string,address,string,address,uint256,uint256,bytes,uint256)"
 				}
 			]
 		}
