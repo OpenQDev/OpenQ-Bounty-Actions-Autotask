@@ -11,4 +11,4 @@
   }
 }`
 
-module.exports={GET_CATEGORY}
+module.exports=GET_CATEGORY

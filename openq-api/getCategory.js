@@ -11,3 +11,5 @@ const getCategory = (labels, type) => {
 	}
 	return undefined;
 };
+
+module.exports = getCategory

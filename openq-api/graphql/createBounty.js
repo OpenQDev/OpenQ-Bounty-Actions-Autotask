@@ -5,7 +5,6 @@ const CREATE_BOUNTY = `
 		$organizationId: String!
 		$type: String!
 		$category: String
-		$bountyType: String!
 	) {
 		createBounty(
 			address: $address
@@ -13,7 +12,6 @@ const CREATE_BOUNTY = `
 			organizationId: $organizationId
 			type: $type
 			category: $category
-			type: $bountyType
 		) {
 			address
 			bountyId
