@@ -14,13 +14,13 @@ const { ethers } = require("ethers");
  * @returns 
  */
 const bountyUpdater = async (
-	getIssue = getIssueImpl,
-	createNewBounty = createNewBountyImpl,
-	addToBounty = addToBountyImpl,
 	eventType,
 	baseUrl,
 	openqApiSecret,
-	params) => {
+	params,
+	getIssue = getIssueImpl,
+	createNewBounty = createNewBountyImpl,
+	addToBounty = addToBountyImpl) => {
 	return new Promise(async (resolve, reject) => {
 		try {
 			let result = null;

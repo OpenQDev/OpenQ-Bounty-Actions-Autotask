@@ -2,6 +2,7 @@ const main = require('./main');
 
 exports.handler = async (event) => {
 	try {
+		console.log('event', event);
 		let result = await main(event);
 		return result;
 	} catch (error) {

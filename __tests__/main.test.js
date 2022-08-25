@@ -5,7 +5,7 @@ const events = require('../__mocks__/events.json');
 
 describe('bountyUpdater', () => {
 	it('BountyCreated', async () => {
-		const result = await main(mockBountyUpdater, mockGithubBot, events.created);
+		const result = await main(events.created, mockBountyUpdater, mockGithubBot);
 		expect(result).toEqual({
 			openQApiResult: {
 				eventType: 'BountyCreated',
@@ -33,7 +33,7 @@ describe('bountyUpdater', () => {
 	});
 
 	it('TokenDepositReceived', async () => {
-		const result = await main(mockBountyUpdater, mockGithubBot, events.funded);
+		const result = await main(events.funded, mockBountyUpdater, mockGithubBot);
 		expect(result).toEqual({
 			openQApiResult: {
 				eventType: 'TokenDepositReceived',
@@ -59,7 +59,7 @@ describe('bountyUpdater', () => {
 	});
 
 	it('DepositRefunded', async () => {
-		const result = await main(mockBountyUpdater, mockGithubBot, events.refunded);
+		const result = await main(events.refunded, mockBountyUpdater, mockGithubBot);
 		expect(result).toEqual({
 			openQApiResult: {
 				eventType: 'DepositRefunded',
@@ -85,7 +85,7 @@ describe('bountyUpdater', () => {
 	});
 
 	it('TokenBalanceClaimed', async () => {
-		const result = await main(mockBountyUpdater, mockGithubBot, events.claimed);
+		const result = await main(events.claimed, mockBountyUpdater, mockGithubBot);
 		expect(result).toEqual({
 			openQApiResult: {
 				eventType: 'TokenBalanceClaimed',

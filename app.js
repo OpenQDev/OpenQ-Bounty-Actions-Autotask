@@ -9,6 +9,7 @@ app.use(express.json());
 
 app.post('/', async (req, res) => {
 	try {
+		console.log(req.body);
 		const result = await main(req.body);
 
 		// On local we mimic the return JSON from OpenZeppelin Autotask

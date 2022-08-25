@@ -3,9 +3,9 @@ const bountyUpdaterImpl = require('./openq-api/bountyUpdater');
 const postGithubCommentImpl = require('./github-bot/postGithubComment');
 
 const main = async (
+	event,
 	bountyUpdater = bountyUpdaterImpl,
-	postGithubComment = postGithubCommentImpl,
-	event) => {
+	postGithubComment = postGithubCommentImpl) => {
 	return new Promise(async (resolve, reject) => {
 		const payload = event.request.body;
 		const { matchReasons, sentinel } = payload;
