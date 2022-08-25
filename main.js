@@ -1,8 +1,11 @@
 const { getBaseUrl, getBotUrl, getOpenQApiSecret, getGithubBotSecret } = require('./utils');
-const postGithubComment = require('./github-bot/postGithubComment');
 const bountyUpdaterImpl = require('./openq-api/bountyUpdater');
+const postGithubCommentImpl = require('./github-bot/postGithubComment');
 
-const main = async (bountyUpdater = bountyUpdaterImpl, event) => {
+const main = async (
+	bountyUpdater = bountyUpdaterImpl,
+	postGithubComment = postGithubCommentImpl,
+	event) => {
 	return new Promise(async (resolve, reject) => {
 		const payload = event.request.body;
 		const { matchReasons, sentinel } = payload;
@@ -10,14 +13,20 @@ const main = async (bountyUpdater = bountyUpdaterImpl, event) => {
 		const eventType = matchReasons[0].signature.replace(/ *\([^)]*\) */g, "");
 		const baseUrl = getBaseUrl(id);
 		const botUrl = getBotUrl(id);
-		const openqApiSecret = getOpenQApiSecret(id, event);
-		const githubBotSecret = getGithubBotSecret(id, event);
+
+		let openqApiSecret;
+		let githubBotSecret;
+		try {
+			openqApiSecret = getOpenQApiSecret(id, event);
+			githubBotSecret = getGithubBotSecret(id, event);
+		} catch (error) {
+			reject(error);
+		}
+
 		let openQApiResult;
 		let githubBotResult;
-
 		try {
 			openQApiResult = await bountyUpdater(eventType, baseUrl, openqApiSecret, matchReasons[0].params);
-			console.log(openQApiResult);
 		} catch (error) {
 			reject(error);
 		}

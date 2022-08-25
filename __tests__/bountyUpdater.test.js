@@ -1,5 +1,5 @@
 const bountyUpdater = require('../openq-api/bountyUpdater');
-const { mockGetIssue, mockCreateNewBounty, mockAddToBounty } = require('./mocks/mocks');
+const { mockGetIssue, mockCreateNewBounty, mockAddToBounty } = require('../__mocks__/mocks');
 
 describe('bountyUpdater', () => {
 	it('BountyCreated', async () => {
@@ -60,6 +60,6 @@ describe('bountyUpdater', () => {
 		expect(openqApiSecret).toEqual('apiSecret123');
 		expect(tokenBalance).toEqual({ "tokenAddress": "0xtoken", "volume": 1000 });
 		expect(address).toEqual('oxbounty');
-		expect(add).toEqual(false);
+		expect(add).toEqual(true);
 	});
 });

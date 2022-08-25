@@ -16,4 +16,16 @@ const mockAddToBounty = async (baseUrl, openqApiSecret, tokenBalance, address, a
 	});
 };
 
-module.exports = { mockGetIssue, mockCreateNewBounty, mockAddToBounty };
+const mockBountyUpdater = async (eventType, baseUrl, openqApiSecret, params) => {
+	return new Promise((resolve, reject) => {
+		return resolve({ eventType, baseUrl, openqApiSecret, params });
+	});
+};
+
+const mockGithubBot = async (botUrl, eventType, githubBotSecret, params) => {
+	return new Promise((resolve, reject) => {
+		return resolve({ botUrl, eventType, githubBotSecret, params });
+	});
+};
+
+module.exports = { mockGetIssue, mockCreateNewBounty, mockAddToBounty, mockBountyUpdater, mockGithubBot };

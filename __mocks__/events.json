@@ -1,0 +1,95 @@
+{
+	"created": {
+		"secrets": {
+			"OPENQ_API_SECRET": "secret123!",
+			"GITHUB_BOT_SECRET": "ghbotsecret123!"
+		},
+		"request": {
+			"body": {
+				"matchReasons": [
+					{
+						"signature": "BountyCreated(string,string,address,address,uint256,uint256,bytes,uint256)",
+						"params": {
+							"bountyAddress": "0x",
+							"bountyId": "bountyId",
+							"organization": "organizationid",
+							"bountyType": "0"
+						}
+					}
+				],
+				"sentinel": {
+					"id": "local"
+				}
+			}
+		}
+	},
+	"funded": {
+		"secrets": {
+			"OPENQ_API_SECRET": "secret123!",
+			"GITHUB_BOT_SECRET": "ghbotsecret123!"
+		},
+		"request": {
+			"body": {
+				"matchReasons": [
+					{
+						"signature": "TokenDepositReceived(bytes32,address,string,string,address,uint256,address,uint256,uint256,uint256,bytes,uint256)",
+						"params": {
+							"volume": 1000,
+							"tokenAddress": "0xtokenaddress",
+							"bountyAddress": "0xbounty"
+						}
+					}
+				],
+				"sentinel": {
+					"id": "local"
+				}
+			}
+		}
+	},
+	"refunded": {
+		"secrets": {
+			"OPENQ_API_SECRET": "secret123!",
+			"GITHUB_BOT_SECRET": "ghbotsecret123!"
+		},
+		"request": {
+			"body": {
+				"matchReasons": [
+					{
+						"signature": "DepositRefunded(bytes32,string,address,string,uint256,address,uint256,uint256,bytes,uint256)",
+						"params": {
+							"volume": 1000,
+							"tokenAddress": "0xtokenaddress",
+							"bountyAddress": "0xbounty"
+						}
+					}
+				],
+				"sentinel": {
+					"id": "local"
+				}
+			}
+		}
+	},
+	"claimed": {
+		"secrets": {
+			"OPENQ_API_SECRET": "secret123!",
+			"GITHUB_BOT_SECRET": "ghbotsecret123!"
+		},
+		"request": {
+			"body": {
+				"matchReasons": [
+					{
+						"signature": "TokenBalanceClaimed(string,address,string,address,uint256,address,uint256,uint256,bytes,uint256)",
+						"params": {
+							"volume": 1000,
+							"tokenAddress": "0xtokenaddress",
+							"bountyAddress": "0xbounty"
+						}
+					}
+				],
+				"sentinel": {
+					"id": "local"
+				}
+			}
+		}
+	}
+}

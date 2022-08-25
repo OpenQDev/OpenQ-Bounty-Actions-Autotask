@@ -25,7 +25,7 @@ const getBotUrl = (autotaskId) => {
 		case PRODUCTION_SENTINEL_ID:
 			return 'https://app.openq.dev/githubbot';
 		default:
-			return reject(new Error('Incorrect Environment'));
+			return new Error('Incorrect Environment');
 	}
 };
 
@@ -53,7 +53,7 @@ const getGithubBotSecret = (autotaskId, event) => {
 		case PRODUCTION_SENTINEL_ID:
 			return event.secrets.GITHUB_BOT_SECRET_PRODUCTION;
 		default:
-			return reject(new Error('Incorrect Environment'));
+			return new Error('Incorrect Environment');
 	}
 };
 
