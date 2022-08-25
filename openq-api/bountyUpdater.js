@@ -1,6 +1,6 @@
-const createNewBounty = require('./createNewBounty');
-const getIssue = require('./getIssue');
-const getCategory = require ("./getCategory")
+const createNewBountyImpl = require('./createNewBounty');
+const getIssueImpl = require('./getIssue');
+const getCategory = require("./getCategory");
 const addToBounty = require('./addToBounty');
 const { ethers } = require("ethers");
 
@@ -13,30 +13,36 @@ const { ethers } = require("ethers");
  * @param { Depending on event, will be different } params 
  * @returns 
  */
-const bountyUpdater = async (eventType, baseUrl, openqApiSecret, params) => {
+const bountyUpdater = async (
+	getIssue = getIssueImpl,
+	createNewBounty = createNewBountyImpl,
+	eventType,
+	baseUrl,
+	openqApiSecret,
+	params) => {
 	return new Promise(async (resolve, reject) => {
 		try {
 			let result = null;
 			switch (eventType) {
 				case 'BountyCreated': {
 					const { bountyAddress, bountyId, organization, bountyType } = params;
-					const type = ethers.BigNumber.from( bountyType).toString();
+					const type = ethers.BigNumber.from(bountyType).toString();
 					let category;
+
 					try {
 						const labels = await getIssue(bountyId);
 						category = getCategory(labels, type);
-					}
-
-					catch (err) {
+					} catch (err) {
 						console.log(err);
 					}
+
 					try {
 						result = await createNewBounty(baseUrl, openqApiSecret, bountyAddress, bountyId, organization, category, type);
 					} catch (error) {
 						console.error('error creating new bounty', JSON.stringify(error));
 						reject(new Error('ERROR CREATING NEW BOUNTY'));
 					}
-					return resolve({ bountyAddress, bountyId, organization });
+					return resolve(result);
 				}
 				case 'TokenDepositReceived': {
 					const { volume, tokenAddress, bountyAddress } = params;

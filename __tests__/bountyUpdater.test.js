@@ -1,33 +1,21 @@
-const axios = require('axios');
-
 const bountyUpdater = require('../openq-api/bountyUpdater');
+const { mockGetIssue, mockCreateNewBounty } = require('./mocks/mocks');
 
 describe('bountyUpdater', () => {
-	afterEach(() => {
-		jest.clearAllMocks();
-	});
 
 	it('BountyCreated', async () => {
-		// ARRANGE
-		const mockPost = jest.spyOn(axios, 'post');
-
-		mockPost.mockImplementation((url) => {
-			return Promise.resolve({ data: 1 });
-		});
-
 		// ACT
-		await bountyUpdater('BountyCreated', 'https://staging.openq.dev/api', 'apiSecret123', { bountyAddress: "0xaddress", bountyId: 'bountyId123', organization: 'orgId123', bountyType: 0 });
+		const result = await bountyUpdater(mockGetIssue, mockCreateNewBounty, 'BountyCreated', 'https://staging.openq.dev/api', 'apiSecret123', { bountyAddress: "0xaddress", bountyId: 'bountyId123', organization: 'orgId123', bountyType: 0 });
+
+		const { baseUrl, openqApiSecret, bountyAddress, bountyId, organization, category, type } = result;
 
 		// ASSERT
-		const url = mockPost.mock.calls[0][0];
-		const { bountyId, address, organizationId, bountyType } = mockPost.mock.calls[0][1].variables;
-		const { headers } = mockPost.mock.calls[0][2];
-
-		expect(url).toEqual('https://staging.openq.dev/api/graphql');
+		expect(baseUrl).toEqual('https://staging.openq.dev/api');
+		expect(openqApiSecret).toEqual('apiSecret123');
+		expect(bountyAddress).toEqual('0xaddress');
 		expect(bountyId).toEqual('bountyId123');
-		expect(address).toEqual('0xaddress');
-		expect(organizationId).toEqual('orgId123');
-		expect(bountyType).toEqual(0);
-		expect(headers).toEqual({ Authorization: 'apiSecret123' });
+		expect(organization).toEqual('orgId123');
+		expect(category).toEqual('prime');
+		expect(type).toEqual('0');
 	});
 });

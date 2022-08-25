@@ -1,8 +1,8 @@
 const { getBaseUrl, getBotUrl, getOpenQApiSecret, getGithubBotSecret } = require('./utils');
 const postGithubComment = require('./github-bot/postGithubComment');
-const bountyUpdater = require('./openq-api/bountyUpdater');
+const bountyUpdaterImpl = require('./openq-api/bountyUpdater');
 
-const main = async (event) => {
+const main = async (bountyUpdater = bountyUpdaterImpl, event) => {
 	return new Promise(async (resolve, reject) => {
 		const payload = event.request.body;
 		const { matchReasons, sentinel } = payload;
