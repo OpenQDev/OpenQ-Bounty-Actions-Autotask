@@ -23,8 +23,6 @@ const main = async (
 			reject(error);
 		}
 
-		let openQApiResult;
-		let githubBotResult;
 		try {
 			openQApiResult = await bountyUpdater(eventType, baseUrl, openqApiSecret, matchReasons[0].params);
 		} catch (error) {
