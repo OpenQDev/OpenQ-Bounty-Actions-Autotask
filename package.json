@@ -9,7 +9,6 @@
 		"start:dev": "nodemon index.js",
 		"test": "jest",
 		"push:staging": "defender-autotask update-code 830dc02f-2de3-4897-b3f7-b77d8218e28f .",
-		"push:staging2": "defender-autotask update-code 93dbe5fc-f92b-4d78-8c64-a2761cac764d .",
 		"push:production": "defender-autotask update-code 29674807-44c9-4ec9-9e02-3768d4f01be5 ."
 	},
 	"keywords": [],
@@ -17,12 +16,5 @@
 	"license": "MIT",
 	"dependencies": {
 		"axios": "^0.27.2"
-	},
-	"devDependencies": {
-		"dotenv": "^14.3.2",
-		"express": "^4.17.2",
-		"jest": "^27.4.7",
-		"nodemon": "^2.0.15",
-		"ethers": "^5.7.0"
 	}
 }

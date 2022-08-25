@@ -11,12 +11,14 @@ const main = async (
 		const { matchReasons, sentinel } = payload;
 		const { id } = sentinel;
 		const eventType = matchReasons[0].signature.replace(/ *\([^)]*\) */g, "");
-		const baseUrl = getBaseUrl(id);
-		const botUrl = getBotUrl(id);
 
+		let baseUrl;
+		let botUrl;
 		let openqApiSecret;
 		let githubBotSecret;
 		try {
+			baseUrl = getBaseUrl(id);
+			botUrl = getBotUrl(id);
 			openqApiSecret = getOpenQApiSecret(id, event);
 			githubBotSecret = getGithubBotSecret(id, event);
 		} catch (error) {
