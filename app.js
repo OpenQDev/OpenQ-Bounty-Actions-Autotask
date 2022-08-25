@@ -2,14 +2,11 @@ const express = require('express');
 const main = require('./main');
 require('dotenv').config();
 
-const events = require('./events/events');
-
 const app = express();
 app.use(express.json());
 
 app.post('/', async (req, res) => {
 	try {
-		console.log(req.body);
 		const result = await main(req.body);
 
 		// On local we mimic the return JSON from OpenZeppelin Autotask

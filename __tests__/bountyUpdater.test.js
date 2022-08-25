@@ -60,6 +60,6 @@ describe('bountyUpdater', () => {
 		expect(openqApiSecret).toEqual('apiSecret123');
 		expect(tokenBalance).toEqual({ "tokenAddress": "0xtoken", "volume": 1000 });
 		expect(address).toEqual('oxbounty');
-		expect(add).toEqual(true);
+		expect(add).toEqual(false);
 	});
 });
