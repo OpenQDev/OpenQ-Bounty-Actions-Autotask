@@ -65,6 +65,16 @@ const bountyUpdater = async (
 					}
 					return resolve(result);
 				}
+				case 'TokenBalanceClaimed': {
+					const { bountyAddress, tokenAddress, volume } = params;
+					try {
+						result = await addToBounty(baseUrl, openqApiSecret, { volume: parseFloat(ethers.utils.formatUnits(volume, 0)), tokenAddress }, bountyAddress, false);
+					} catch (error) {
+						console.error('ERROR UPDATING BOUNTY', JSON.stringify(error));
+						reject(new Error('Unknown Event'));
+					}
+					return resolve(result);
+				}
 				case 'BountyClosed': {
 					resolve({});
 				}

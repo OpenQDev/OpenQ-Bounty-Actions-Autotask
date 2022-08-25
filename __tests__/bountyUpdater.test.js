@@ -4,7 +4,7 @@ const { mockGetIssue, mockCreateNewBounty, mockAddToBounty } = require('./mocks/
 describe('bountyUpdater', () => {
 	it('BountyCreated', async () => {
 		// ACT
-		const result = await bountyUpdater(mockGetIssue, mockCreateNewBounty, 'BountyCreated', 'https://staging.openq.dev/api', 'apiSecret123', { bountyAddress: "0xaddress", bountyId: 'bountyId123', organization: 'orgId123', bountyType: 0 });
+		const result = await bountyUpdater(mockGetIssue, mockCreateNewBounty, mockAddToBounty, 'BountyCreated', 'https://staging.openq.dev/api', 'apiSecret123', { bountyAddress: "0xaddress", bountyId: 'bountyId123', organization: 'orgId123', bountyType: 0 });
 
 		const { baseUrl, openqApiSecret, bountyAddress, bountyId, organization, category, type } = result;
 
@@ -18,7 +18,7 @@ describe('bountyUpdater', () => {
 		expect(type).toEqual('0');
 	});
 
-	it.only('TokenDepositReceived', async () => {
+	it('TokenDepositReceived', async () => {
 		// ACT
 		const params = { volume: '1000', tokenAddress: '0xtoken', bountyAddress: 'oxbounty' };
 		const result = await bountyUpdater(mockGetIssue, mockCreateNewBounty, mockAddToBounty, 'TokenDepositReceived', 'https://staging.openq.dev/api', 'apiSecret123', params);
@@ -33,10 +33,25 @@ describe('bountyUpdater', () => {
 		expect(add).toEqual(true);
 	});
 
-	it.only('DepositRefunded', async () => {
+	it('DepositRefunded', async () => {
 		// ACT
 		const params = { volume: '1000', tokenAddress: '0xtoken', bountyAddress: 'oxbounty' };
 		const result = await bountyUpdater(mockGetIssue, mockCreateNewBounty, mockAddToBounty, 'DepositRefunded', 'https://staging.openq.dev/api', 'apiSecret123', params);
+
+		const { baseUrl, openqApiSecret, tokenBalance, address, add } = result;
+
+		// ASSERT
+		expect(baseUrl).toEqual('https://staging.openq.dev/api');
+		expect(openqApiSecret).toEqual('apiSecret123');
+		expect(tokenBalance).toEqual({ "tokenAddress": "0xtoken", "volume": 1000 });
+		expect(address).toEqual('oxbounty');
+		expect(add).toEqual(false);
+	});
+
+	it('TokenBalanceClaimed', async () => {
+		// ACT
+		const params = { volume: '1000', tokenAddress: '0xtoken', bountyAddress: 'oxbounty' };
+		const result = await bountyUpdater(mockGetIssue, mockCreateNewBounty, mockAddToBounty, 'TokenBalanceClaimed', 'https://staging.openq.dev/api', 'apiSecret123', params);
 
 		const { baseUrl, openqApiSecret, tokenBalance, address, add } = result;
 
