@@ -1,7 +1,7 @@
 const { ADD_TO_BOUNTY } = require('./graphql');
 const axios = require('axios');
 
-const addToBounty = async (baseUrl, openqApiSecret,  tokenBalance, address, add) => {
+const addToBounty = async (baseUrl, openqApiSecret, tokenBalance, address, add) => {
 	return new Promise(async (resolve, reject) => {
 		try {
 			const result = await axios

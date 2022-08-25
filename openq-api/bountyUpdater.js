@@ -1,7 +1,7 @@
 const createNewBountyImpl = require('./createNewBounty');
 const getIssueImpl = require('./getIssue');
+const addToBountyImpl = require('./addToBounty');
 const getCategory = require("./getCategory");
-const addToBounty = require('./addToBounty');
 const { ethers } = require("ethers");
 
 /**
@@ -16,6 +16,7 @@ const { ethers } = require("ethers");
 const bountyUpdater = async (
 	getIssue = getIssueImpl,
 	createNewBounty = createNewBountyImpl,
+	addToBounty = addToBountyImpl,
 	eventType,
 	baseUrl,
 	openqApiSecret,
@@ -52,7 +53,7 @@ const bountyUpdater = async (
 						console.error('error creating new bounty', JSON.stringify(error));
 						reject(new Error('ERROR UPDATING BOUNTY'));
 					}
-					return resolve({ volume: ethers.utils.formatUnits(volume, 0), tokenAddress, bountyAddress });
+					return resolve(result);
 				}
 				case 'DepositRefunded': {
 					const { bountyAddress, tokenAddress, volume } = params;
@@ -62,7 +63,7 @@ const bountyUpdater = async (
 						console.error('ERROR UPDATING BOUNTY', JSON.stringify(error));
 						reject(new Error('Unknown Event'));
 					}
-					return resolve({ volume: ethers.utils.formatUnits(volume, 0), tokenAddress, bountyAddress });
+					return resolve(result);
 				}
 				case 'BountyClosed': {
 					resolve({});
