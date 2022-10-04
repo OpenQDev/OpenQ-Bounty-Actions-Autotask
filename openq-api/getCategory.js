@@ -1,7 +1,7 @@
 const getCategory = (labels) => {
 	console.log(labels)
-		if (labels.includes("not for profit")) {
-			return "not for profit";
+		if (labels.includes("non-profit")) {
+			return "non-profit";
 		}
 		return undefined;
 	};	
