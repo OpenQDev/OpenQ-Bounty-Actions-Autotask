@@ -32,7 +32,7 @@ const bountyUpdater = async (
 
 					try {
 						const labels = await getIssue(bountyId);
-						category = getCategory(labels, type);
+						category = getCategory(labels);
 					} catch (err) {
 						console.log(err);
 					}
