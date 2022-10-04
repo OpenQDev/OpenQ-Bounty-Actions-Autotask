@@ -1,14 +1,9 @@
-const getCategory = (labels, type) => {
-	if (type === "0" || labels.some(label => label === "prime")) {
-		return "prime";
-	}
-	if (type === "1" && labels.some(label => label === "learn2earn")) {
-		return "learn2earn";
-	}
-	if ((type === "2" || type === "3") && labels.some(label => label === "contest")) {
-		return "contest";
-	}
-	return undefined;
-};
+const getCategory = (labels) => {
+	console.log(labels)
+		if (labels.includes("non-profit")) {
+			return "non-profit";
+		}
+		return undefined;
+	};	
 
 module.exports = getCategory;
