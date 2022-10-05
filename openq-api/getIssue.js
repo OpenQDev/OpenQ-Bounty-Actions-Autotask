@@ -20,7 +20,7 @@ const getIssue = async (bountyId) => {
 
 			);
 		return result.data.data.node.labels.nodes.map(label => label.name.toLowerCase())
-			.filter(label =>label === "non-profit");
+			.filter(label => label === "non-profit");
 	} catch (error) {
 		// GraphQL errors at error.response.data.errors
 		console.error('error in getIssue', error);
