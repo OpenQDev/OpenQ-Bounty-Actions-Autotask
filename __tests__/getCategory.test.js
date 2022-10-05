@@ -4,25 +4,16 @@ describe('getCategory', () => {
 	const emptyArray = [];
 
 	it('returns correct PRIME category', () => {
-		const primeLabels = ['good beginner issue', 'prime'];
+		const primeLabels = ['good beginner issue', 'non-profit'];
 
-		expect(getCategory(primeLabels, '0')).toEqual('prime');
-		expect(getCategory(emptyArray, '0')).toEqual('prime');
+		expect(getCategory(primeLabels, '0')).toEqual('non-profit');
+		expect(getCategory(emptyArray, '0')).toEqual(undefined);
 	});
 
 	it('returns correct ONGOING category', () => {
-		const ongoingLabels = ['good beginner issue', 'learn2earn'];
+		const ongoingLabels = ['good beginner issue', 'non-profit'];
 
-		expect(getCategory(ongoingLabels, '1')).toEqual('learn2earn');
+		expect(getCategory(ongoingLabels, '1')).toEqual('non-profit');
 		expect(getCategory(emptyArray, '1')).toEqual(undefined);
-	});
-
-	it('returns correct CONTEST category', () => {
-		const contestLabels = ['good beginner issue', 'contest'];
-
-		expect(getCategory(contestLabels, '2')).toEqual('contest');
-		expect(getCategory(contestLabels, '3')).toEqual('contest');
-		expect(getCategory(emptyArray, '2')).toEqual(undefined);
-		expect(getCategory(emptyArray, '3')).toEqual(undefined);
 	});
 });
