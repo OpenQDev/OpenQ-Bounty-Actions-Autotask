@@ -8,7 +8,7 @@
 		"start": "node index.js",
 		"start:dev": "nodemon index.js",
 		"test": "jest",
-		"push:staging": "defender-autotask update-code 830dc02f-2de3-4897-b3f7-b77d8218e28f .",
+		"push:staging": "defender-autotask update-code 408ded21-e315-4c79-a1bc-ad8c754c2a09 .",
 		"push:production": "defender-autotask update-code 29674807-44c9-4ec9-9e02-3768d4f01be5 ."
 	},
 	"keywords": [],
