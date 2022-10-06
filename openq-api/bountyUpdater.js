@@ -18,10 +18,10 @@ const bountyUpdater = async (
 	baseUrl,
 	openqApiSecret,
 	params,
+	pat,
 	getIssue = getIssueImpl,
 	createNewBounty = createNewBountyImpl,
-	addToBounty = addToBountyImpl,
-	pat
+	addToBounty = addToBountyImpl
 ) => {
 	return new Promise(async (resolve, reject) => {
 		try {
