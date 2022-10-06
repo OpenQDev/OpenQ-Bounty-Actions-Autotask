@@ -1,7 +1,7 @@
 const axios = require('axios');
 const { GET_CATEGORY } = require('./graphql');
 
-const getIssue = async (bountyId) => {
+const getIssue = async (bountyId, pat) => {
 	let result;
 
 	try {
@@ -14,7 +14,7 @@ const getIssue = async (bountyId) => {
 				},
 				{
 					headers: {
-						Authorization: `Bearer ${process.env.PAT}`,
+						Authorization: `Bearer ${pat}`,
 					},
 				}
 

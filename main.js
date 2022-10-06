@@ -16,17 +16,19 @@ const main = async (
 		let botUrl;
 		let openqApiSecret;
 		let githubBotSecret;
+		let pat;
 		try {
 			baseUrl = getBaseUrl(id);
 			botUrl = getBotUrl(id);
 			openqApiSecret = getOpenQApiSecret(id, event);
 			githubBotSecret = getGithubBotSecret(id, event);
+			pat = event.secrets.PAT;
 		} catch (error) {
 			reject(error);
 		}
 
 		try {
-			openQApiResult = await bountyUpdater(eventType, baseUrl, openqApiSecret, matchReasons[0].params);
+			openQApiResult = await bountyUpdater(eventType, baseUrl, openqApiSecret, matchReasons[0].params, pat);
 		} catch (error) {
 			reject(error);
 		}

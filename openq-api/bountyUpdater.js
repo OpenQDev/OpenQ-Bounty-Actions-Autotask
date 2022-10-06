@@ -20,7 +20,9 @@ const bountyUpdater = async (
 	params,
 	getIssue = getIssueImpl,
 	createNewBounty = createNewBountyImpl,
-	addToBounty = addToBountyImpl) => {
+	addToBounty = addToBountyImpl,
+	pat
+) => {
 	return new Promise(async (resolve, reject) => {
 		try {
 			let result = null;
@@ -31,7 +33,7 @@ const bountyUpdater = async (
 					let category;
 
 					try {
-						const labels = await getIssue(bountyId);
+						const labels = await getIssue(bountyId, pat);
 						category = getCategory(labels);
 					} catch (err) {
 						console.log(err);
