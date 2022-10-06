@@ -14,7 +14,7 @@ describe('bountyUpdater', () => {
 		expect(bountyAddress).toEqual('0xaddress');
 		expect(bountyId).toEqual('bountyId123');
 		expect(organization).toEqual('orgId123');
-		expect(category).toEqual('prime');
+		expect(category).toEqual(undefined);
 		expect(type).toEqual('0');
 	});
 
