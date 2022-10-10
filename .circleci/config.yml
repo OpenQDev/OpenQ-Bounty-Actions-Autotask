@@ -25,8 +25,8 @@ jobs:
               echo "" >> $(pwd)/.env
               echo "GITHUB_BOT_SECRET=$GITHUB_BOT_SECRET" >> $(pwd)/.env
             fi
-      - run: docker build -t openq/openq-bounty-actions-autotask:$CIRCLE_TAG --build-arg deploy_env=$DEPLOY_ENV .
-      - run: docker run -d --name openq-bounty-actions-autotask openq/openq-bounty-actions-autotask:$CIRCLE_TAG
+      - run: docker build -t arcanya/openq-bounty-actions-autotask:$CIRCLE_TAG --build-arg deploy_env=$DEPLOY_ENV .
+      - run: docker run -d --name openq-bounty-actions-autotask arcanya/openq-bounty-actions-autotask:$CIRCLE_TAG
       - run: docker push arcanya/openq-bounty-actions-autotask:$CIRCLE_TAG
 
   test:
