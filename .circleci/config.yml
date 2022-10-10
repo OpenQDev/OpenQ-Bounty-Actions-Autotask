@@ -19,7 +19,11 @@ jobs:
             if [ "$DEPLOY_ENV" = staging ]; then
               echo "$staging_env" | base64 --decode > $(pwd)/.env
               echo "" >> $(pwd)/.env
-              echo "PATS=$PATS" >> $(pwd)/.env
+              echo "PAT=$PAT" >> $(pwd)/.env
+              echo "" >> $(pwd)/.env
+              echo "OPENQ_API_SECRET=$OPENQ_API_SECRET" >> $(pwd)/.env
+              echo "" >> $(pwd)/.env
+              echo "GITHUB_BOT_SECRET=$GITHUB_BOT_SECRET" >> $(pwd)/.env
             fi
       - run: docker build -t openq/openq-bounty-actions-autotask:$CIRCLE_TAG --build-arg deploy_env=$DEPLOY_ENV .
       - run: docker run -d --name openq-bounty-actions-autotask openq/openq-bounty-actions-autotask:$CIRCLE_TAG
@@ -32,12 +36,11 @@ jobs:
       - checkout
       - run: docker pull openq/openq-bounty-actions-autotask:$CIRCLE_TAG
       - run: docker run -d --name openq-bounty-actions-autotask openq/openq-bounty-actions-autotask:$CIRCLE_TAG
-      - run: docker exec openq-bounty-actions-autotask yarn json-server:cicd
       - run:
           name: Test application
           command: |
             TEST=$(circleci tests glob "__tests__/**/*.test.js" | circleci tests split --split-by=timings)
-            docker exec openq-bounty-actions-autotask yarn test:cicd $TEST
+            docker exec openq-bounty-actions-autotask yarn test $TEST
             echo $TEST
       - run:
           command: mkdir ~/test-results &&  docker cp openq-bounty-actions-autotask:/app/junit.xml ~/test-results/junit.xml
