@@ -34,8 +34,8 @@ jobs:
     machine: true
     steps:
       - checkout
-      - run: docker pull openq/openq-bounty-actions-autotask:$CIRCLE_TAG
-      - run: docker run -d --name openq-bounty-actions-autotask openq/openq-bounty-actions-autotask:$CIRCLE_TAG
+      - run: docker pull arcanya/openq-bounty-actions-autotask:$CIRCLE_TAG
+      - run: docker run -d --name openq-bounty-actions-autotask arcanya/openq-bounty-actions-autotask:$CIRCLE_TAG
       - run:
           name: Test application
           command: |
