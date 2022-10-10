@@ -27,7 +27,7 @@ jobs:
             fi
       - run: docker build -t openq/openq-bounty-actions-autotask:$CIRCLE_TAG --build-arg deploy_env=$DEPLOY_ENV .
       - run: docker run -d --name openq-bounty-actions-autotask openq/openq-bounty-actions-autotask:$CIRCLE_TAG
-      - run: docker push openq/openq-bounty-actions-autotask:$CIRCLE_TAG
+      - run: docker push arcanya/openq-bounty-actions-autotask:$CIRCLE_TAG
 
   test:
     parallelism: 10
