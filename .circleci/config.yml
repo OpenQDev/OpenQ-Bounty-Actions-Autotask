@@ -1,0 +1,109 @@
+version: 2.1
+orbs:
+  kubernetes: circleci/kubernetes@0.12.0
+jobs:
+  build:
+    machine: true
+    steps:
+      - checkout
+      - run: echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USER --password-stdin
+      - run:
+          name: Update DEPLOY_ENV environment variable using CIRCLE_TAG
+          command: |
+            echo 'export DEPLOY_ENV=$(echo ${CIRCLE_TAG} | sed 's/-.*//')' >> $BASH_ENV
+            source $BASH_ENV
+      - run: echo $DEPLOY_ENV
+      - run:
+          name: Load .env based on $DEPLOY_ENV
+          command: |
+            if [ "$DEPLOY_ENV" = staging ]; then
+              echo "$staging_env" | base64 --decode > $(pwd)/.env
+              echo "" >> $(pwd)/.env
+              echo "PATS=$PATS" >> $(pwd)/.env
+            fi
+      - run: docker build -t openq/openq-bounty-actions-autotask:$CIRCLE_TAG --build-arg deploy_env=$DEPLOY_ENV .
+      - run: docker run -d --name openq-bounty-actions-autotask openq/openq-bounty-actions-autotask:$CIRCLE_TAG
+      - run: docker push openq/openq-bounty-actions-autotask:$CIRCLE_TAG
+
+  test:
+    parallelism: 10
+    machine: true
+    steps:
+      - checkout
+      - run: docker pull openq/openq-bounty-actions-autotask:$CIRCLE_TAG
+      - run: docker run -d --name openq-bounty-actions-autotask openq/openq-bounty-actions-autotask:$CIRCLE_TAG
+      - run: docker exec openq-bounty-actions-autotask yarn json-server:cicd
+      - run:
+          name: Test application
+          command: |
+            TEST=$(circleci tests glob "__tests__/**/*.test.js" | circleci tests split --split-by=timings)
+            docker exec openq-bounty-actions-autotask yarn test:cicd $TEST
+            echo $TEST
+      - run:
+          command: mkdir ~/test-results &&  docker cp openq-bounty-actions-autotask:/app/junit.xml ~/test-results/junit.xml
+          when: always
+      - store_test_results:
+          path: ~/test-results//junit.xml
+      - store_artifacts:
+          path: ~/test-results//junit.xml
+
+  pushHelm:
+    machine: true
+    steps:
+      - checkout
+      - run: echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USER --password-stdin
+      - run:
+          name: Update DEPLOY_ENV environment variable using CIRCLE_TAG
+          command: |
+            echo 'export DEPLOY_ENV=$(echo ${CIRCLE_TAG} | sed 's/-.*//')' >> $BASH_ENV
+            source $BASH_ENV
+      - run: echo $DEPLOY_ENV
+      - run:
+          command: |
+            wget https://github.com/mikefarah/yq/releases/download/v4.27.5/yq_linux_386
+            sudo mv yq_linux_386 /usr/local/bin/yq
+            sudo chmod +x /usr/local/bin/yq
+            git clone https://${CIRCLECI_PAT}@github.com/openqdev/OpenQ-Helm.git
+            cd OpenQ-Helm/
+            yq -i '.frontend.image.tag = env(CIRCLE_TAG)' values-$DEPLOY_ENV.yaml
+            cat values-$DEPLOY_ENV.yaml
+            git add .
+            git commit -m "[CIRCLE CI] ${CIRCLE_TAG}"
+            git remote set-url origin https://${CIRCLECI_PAT}@github.com/openqdev/OpenQ-Helm.git
+            git push
+            git tag -f ${CIRCLE_TAG}
+            git push -f origin ${CIRCLE_TAG} --tags
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build:
+          context: OpenQ
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only:
+                - /^staging.*/
+      - test:
+          context: OpenQ
+          requires:
+            - build
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only:
+                - /^staging.*/
+      - pushHelm:
+          context: OpenQ
+          requires:
+            - build
+            - test
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only:
+                - /^staging.*/
