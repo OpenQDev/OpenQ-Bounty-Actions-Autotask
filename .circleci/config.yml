@@ -6,28 +6,12 @@ jobs:
     machine: true
     steps:
       - checkout
-      - run: echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USER --password-stdin
       - run:
-          name: Update DEPLOY_ENV environment variable using CIRCLE_TAG
+          name: Update Autotask
           command: |
-            echo 'export DEPLOY_ENV=$(echo ${CIRCLE_TAG} | sed 's/-.*//')' >> $BASH_ENV
-            source $BASH_ENV
-      - run: echo $DEPLOY_ENV
-      - run:
-          name: Load .env based on $DEPLOY_ENV
-          command: |
-            if [ "$DEPLOY_ENV" = staging ]; then
-              echo "$staging_env" | base64 --decode > $(pwd)/.env
-              echo "" >> $(pwd)/.env
-              echo "PAT=$PAT" >> $(pwd)/.env
-              echo "" >> $(pwd)/.env
-              echo "OPENQ_API_SECRET=$OPENQ_API_SECRET" >> $(pwd)/.env
-              echo "" >> $(pwd)/.env
-              echo "GITHUB_BOT_SECRET=$GITHUB_BOT_SECRET" >> $(pwd)/.env
-            fi
-      - run: docker build -t arcanya/openq-bounty-actions-autotask:$CIRCLE_TAG --build-arg deploy_env=$DEPLOY_ENV .
-      - run: docker run -d --name openq-bounty-actions-autotask arcanya/openq-bounty-actions-autotask:$CIRCLE_TAG
-      - run: docker push arcanya/openq-bounty-actions-autotask:$CIRCLE_TAG
+            npm install defender-autotask-client
+            defender-autotask update-code $API_SECRET <check first>
+            defender-autotask update-code $API_SECRET <check first> 
 
 workflows:
   version: 2
