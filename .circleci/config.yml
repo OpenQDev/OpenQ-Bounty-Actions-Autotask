@@ -25,7 +25,7 @@ jobs:
           name: Update Autotask
           command: |
             npm install -g defender-autotask-client
-            npm push:staging
+            npm run push:staging
 
 workflows:
   version: 2
