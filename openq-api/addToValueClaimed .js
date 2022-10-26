@@ -5,7 +5,6 @@ const addToValueClaimed = async (baseUrl, openqApiSecret, variables) => {
 const {volume, address, add, tokenAddress}=variables
 	return new Promise(async (resolve, reject) => {
 		try {
-		console.log(volume, address, add, tokenAddress)
 			const result = await axios
 				.post(
 					`${baseUrl}/graphql`,
@@ -21,7 +20,6 @@ const {volume, address, add, tokenAddress}=variables
 				);
 			return resolve(result.data);
 		} catch (error) {
-		console.log(error.response.data)
 			return reject(error);
 		}
 	});
