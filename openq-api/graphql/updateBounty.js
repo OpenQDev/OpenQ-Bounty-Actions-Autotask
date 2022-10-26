@@ -1,13 +1,13 @@
 const UPDATE_BOUNTY = `
 	mutation Mutation(
 		$address: String!
-		$tvl: Float!
-		$organizationId: String!
+		$tvl: Float
+		$tvc: Float
 	) {
 		updateBounty(
 			address: $address
 			tvl: $tvl
-			organizationId: $organizationId
+			tvc: $tvc
 		) {
 			address
 		}
