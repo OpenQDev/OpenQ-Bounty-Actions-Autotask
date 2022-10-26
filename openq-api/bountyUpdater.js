@@ -3,6 +3,7 @@ const getIssueImpl = require('./getIssue');
 const addToBountyImpl = require('./addToBounty');
 const getCategory = require("./getCategory");
 const { ethers } = require("ethers");
+const addToValueClaimed = require('./addToValueClaimed ');
 
 /**
  * bountyUpdater takes in an event type and responds by creating a new Bounty document in OpenQ-API if it is a 
@@ -70,7 +71,7 @@ const bountyUpdater = async (
 				case 'TokenBalanceClaimed': {
 					const { bountyAddress, tokenAddress, volume } = params;
 					try {
-						result = await addToBounty(baseUrl, openqApiSecret, { volume: parseFloat(ethers.utils.formatUnits(volume, 0)), tokenAddress }, bountyAddress, false);
+						result = await addToValueClaimed(baseUrl, openqApiSecret, { volume: ethers.utils.formatUnits(volume, 0), tokenAddress, address: bountyAddress, add: true });
 					} catch (error) {
 						console.error('ERROR UPDATING BOUNTY', JSON.stringify(error));
 						reject(new Error('Unknown Event'));
