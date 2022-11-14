@@ -19,8 +19,9 @@ const getIssue = async (bountyId, pat) => {
 				}
 
 			);
-		return result.data.data.node.labels.nodes.map(label => label.name.toLowerCase())
+		const labels = result.data.data.node.labels.nodes.map(label => label.name.toLowerCase())
 			.filter(label => label === "non-profit");
+		return { labels, repositoryId: result.data.data.node.repository.id };
 	} catch (error) {
 		// GraphQL errors at error.response.data.errors
 		console.error('error in getIssue', error);

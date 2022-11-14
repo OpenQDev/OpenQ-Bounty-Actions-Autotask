@@ -1,7 +1,10 @@
- const GET_CATEGORY = `query ($bountyId: ID!) {
+const GET_CATEGORY = `query ($bountyId: ID!) {
   node(id: $bountyId) {
     ... on Issue {
-	id
+			id
+			repository {
+        id
+      }
       labels(first: 10) {        
         nodes {
           name
@@ -9,6 +12,6 @@
       }
     }
   }
-}`
+}`;
 
-module.exports=GET_CATEGORY
+module.exports = GET_CATEGORY;
