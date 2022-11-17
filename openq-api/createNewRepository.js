@@ -1,7 +1,7 @@
 const { CREATE_CONTEST } = require('./graphql');
 const axios = require('axios');
 
-const createNewContest = async (baseUrl, openqApiSecret, organizationId, repositoryId, bountyId) => {
+const createNewRepository = async (baseUrl, openqApiSecret, organizationId, repositoryId, bountyId) => {
 	return new Promise(async (resolve, reject) => {
 		try {
 			const result = await axios
@@ -26,4 +26,4 @@ const createNewContest = async (baseUrl, openqApiSecret, organizationId, reposit
 	});
 };
 
-module.exports = createNewContest;
+module.exports = createNewRepository;

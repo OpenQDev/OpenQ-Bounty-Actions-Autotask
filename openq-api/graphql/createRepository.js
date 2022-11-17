@@ -1,10 +1,10 @@
-const CREATE_CONTEST = `
+const CREATE_REPOSITORY = `
 	mutation Mutation(
 		$organizationId: String!
 		$repositoryId: String!
 		$bountyId: String!
 	) {
-		createContest(
+		createRepository(
 			organizationId: $organizationId
 			repositoryId: $repositoryId
 			bountyId: $bountyId
@@ -16,4 +16,4 @@ const CREATE_CONTEST = `
 	}
 `;
 
-module.exports = CREATE_CONTEST;
+module.exports = CREATE_REPOSITORY;

@@ -4,7 +4,7 @@ const addToBountyImpl = require('./addToBounty');
 const getCategory = require("./getCategory");
 const { ethers } = require("ethers");
 const addToValueClaimed = require('./addToValueClaimed ');
-const createNewContest = require('./createNewContest');
+const createNewRepository = require('./createNewRepository');
 
 /**
  * bountyUpdater takes in an event type and responds by creating a new Bounty document in OpenQ-API if it is a 
@@ -44,7 +44,7 @@ const bountyUpdater = async (
 					}
 
 					try {
-						result = await createNewBounty(baseUrl, openqApiSecret, bountyAddress, bountyId, organization, category, type);
+						result = await createNewBounty(baseUrl, openqApiSecret, bountyAddress, bountyId, organization, bountyRepositoryId, category, type);
 					} catch (error) {
 						console.error('error creating new bounty', JSON.stringify(error));
 						reject(new Error('ERROR CREATING NEW BOUNTY'));
@@ -53,7 +53,7 @@ const bountyUpdater = async (
 					const isContest = bountyType == 2 || bountyType == 3;
 					if (isContest) {
 						try {
-							result = await createNewContest(baseUrl, openqApiSecret, organization, bountyRepositoryId, bountyId);
+							result = await createNewRepository(baseUrl, openqApiSecret, organization, bountyRepositoryId, bountyId);
 						} catch (error) {
 							console.error('error creating new contest', JSON.stringify(error));
 							reject(new Error('ERROR CREATING NEW CONTEST'));
