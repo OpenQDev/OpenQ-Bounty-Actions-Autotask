@@ -22,7 +22,7 @@ const main = async (
 			botUrl = getBotUrl(id);
 			openqApiSecret = getOpenQApiSecret(id, event);
 			githubBotSecret = getGithubBotSecret(id, event);
-			pat = event.secrets.PAT;
+			pat = event.secrets.PAT||process.env.PAT;
 		} catch (error) {
 			reject(error);
 		}
