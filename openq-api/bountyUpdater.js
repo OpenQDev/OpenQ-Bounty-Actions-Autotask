@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 const createNewBountyImpl = require('./createNewBounty');
 const getIssueImpl = require('./getIssue');
 const addToBountyImpl = require('./addToBounty');
@@ -84,6 +86,13 @@ const bountyUpdater = async (
 				}
 				case 'TokenBalanceClaimed': {
 					const { bountyAddress, tokenAddress, volume } = params;
+					try {
+					const message = await axios.post(`${process.env.OPENQ_INVOICING_SERVER}/email`, params);
+					console.log(message)
+					}
+					catch (error) {
+						console.log(error);
+					}
 					try {
 						result = await addToValueClaimed(baseUrl, openqApiSecret, { volume: ethers.utils.formatUnits(volume, 0), tokenAddress, address: bountyAddress, add: true });
 					} catch (error) {
