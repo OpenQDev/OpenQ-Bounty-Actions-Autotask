@@ -1,32 +1,21 @@
 {
-	"name": "OpenQ-Bounty-Actions-Autotask",
-	"version": "1.0.0",
-	"description": "",
-	"main": "dist/index.js",
-	"private": true,
-	"scripts": {
-		"version": "node --version",
-		"start": "node index.js",
-		"start:dev": "nodemon index.js",
-		"test": "jest",
-		"push:staging": "defender-autotask update-code 408ded21-e315-4c79-a1bc-ad8c754c2a09 .",
-		"push:production": "defender-autotask update-code 29674807-44c9-4ec9-9e02-3768d4f01be5 ."
-	},
-	"keywords": [],
-	"author": "",
-	"license": "MIT",
-	"dependencies": {
-		"axios": "0.27.2"
-	},
-	"devDependencies": {
-		"axios-mock-adapter": "1.20.0",
-		"dotenv": "14.3.2",
-		"ethers": "5.4.1",
-		"express": "4.17.2",
-		"nodemon": "2.0.15",
-		"defender-relay-client": "1.11.1",
-		"jest": "27.4.7",
-		"eslint": "8.13.0",
-		"eslint-plugin-unused-imports": "2.0.0"
-	}
+  "name": "OpenQ-Bounty-Actions-Autotask",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "private": true,
+  "scripts": {
+    "version": "node --version",
+    "start": "node index.js",
+    "start:dev": "nodemon index.js",
+    "test": "jest",
+    "push:staging": "defender-autotask update-code 408ded21-e315-4c79-a1bc-ad8c754c2a09 .",
+    "push:production": "defender-autotask update-code 29674807-44c9-4ec9-9e02-3768d4f01be5 ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "0.27.2"
+  }
 }
