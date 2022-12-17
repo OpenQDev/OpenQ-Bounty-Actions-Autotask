@@ -17,5 +17,12 @@
   "license": "MIT",
   "dependencies": {
     "axios": "0.27.2"
-  }
+  },
+	"devDependencies": {
+		"dotenv": "^14.3.2",
+		"express": "^4.17.2",
+		"jest": "^27.4.7",
+		"nodemon": "^2.0.15",
+		"ethers": "^5.7.0"
+	}
 }
