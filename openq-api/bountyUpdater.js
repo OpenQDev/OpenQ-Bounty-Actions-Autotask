@@ -69,7 +69,7 @@ const bountyUpdater = async (
 					try {
 						result = await addToBounty(baseUrl, openqApiSecret, { volume: parseFloat(ethers.utils.formatUnits(volume, 0)), tokenAddress }, bountyAddress, true);
 					} catch (error) {
-						console.error('error creating new bounty', JSON.stringify(error));
+						console.error('error creating new bounty', JSON.stringify(error), bountyAddress, tokenAddress);
 						reject(new Error('ERROR UPDATING BOUNTY'));
 					}
 					return resolve(result);
