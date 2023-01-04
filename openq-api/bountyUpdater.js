@@ -30,6 +30,7 @@ const bountyUpdater = async (
 	return new Promise(async (resolve, reject) => {
 		try {
 			let result = null;
+			console.log('eventType': eventType)
 			switch (eventType) {
 				case 'BountyCreated': {
 					const { bountyAddress, bountyId, organization, bountyType } = params;
@@ -102,7 +103,7 @@ const bountyUpdater = async (
 					return resolve(result);
 				}
 				case 'BountyClosed': {
-					resolve({});
+					return resolve({});
 				}
 				default: {
 					reject(new Error('Unknown Event'));
