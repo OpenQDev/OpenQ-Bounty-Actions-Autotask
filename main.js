@@ -1,4 +1,4 @@
-const { getBaseUrl, getBotUrl, getOpenQApiSecret, getGithubBotSecret } = require('./utils');
+const { getBaseUrl, getBotUrl, getOpenQApiSecret, getGithubBotSecret, getInvoiceUrl } = require('./utils');
 const bountyUpdaterImpl = require('./openq-api/bountyUpdater');
 const postGithubCommentImpl = require('./github-bot/postGithubComment');
 
@@ -24,6 +24,8 @@ const main = async (
 			botUrl = getBotUrl(id);
 			openqApiSecret = getOpenQApiSecret(id, event);
 			githubBotSecret = getGithubBotSecret(id, event);
+			invoiceUrl = getInvoiceUrl(id, event)
+			console.log('invoiceUrl', invoiceUrl)
 			pat = event.secrets.PAT||process.env.PAT;
 		} catch (error) {
 			reject(error);
