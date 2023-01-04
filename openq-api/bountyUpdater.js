@@ -23,6 +23,7 @@ const bountyUpdater = async (
 	openqApiSecret,
 	params,
 	pat,
+	invoiceUrl,
 	getIssue = getIssueImpl,
 	createNewBounty = createNewBountyImpl,
 	addToBounty = addToBountyImpl
@@ -30,7 +31,7 @@ const bountyUpdater = async (
 	return new Promise(async (resolve, reject) => {
 		try {
 			let result = null;
-			console.log('eventType': eventType)
+			console.log('eventType', eventType)
 			switch (eventType) {
 				case 'BountyCreated': {
 					const { bountyAddress, bountyId, organization, bountyType } = params;
@@ -88,7 +89,7 @@ const bountyUpdater = async (
 				case 'TokenBalanceClaimed': {
 					const { bountyAddress, tokenAddress, volume } = params;
 					try {
-					const message = await axios.post(`${process.env.OPENQ_INVOICING_SERVER}/email`, params);
+					const message = await axios.post(`${invoiceUrl}/email`, params);
 					console.log(message)
 					}
 					catch (error) {

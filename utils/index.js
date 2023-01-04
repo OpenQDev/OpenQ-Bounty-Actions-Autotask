@@ -78,11 +78,30 @@ const getGithubBotSecret = (autotaskId, event) => {
 	}
 };
 
+const getInvoiceUrl = (autotaskId, event) => {
+	let baseUrl = null;
+	switch (autotaskId) {
+		case LOCAL_EVENT_LISTENER_ID:
+			return event.secrets.OPENQ_INVOICING_SERVER;
+		case STAGING_OPENQ_SENTINEL_ID:
+		case STAGING_CLAIM_MANAGER_SENTINEL_ID:
+		case STAGING_DEPOSIT_MANAGER_SENTINEL_ID:
+			return event.secrets.OPENQ_INVOICING_SERVER_STAGING;
+		case PRODUCTION_OPENQ_SENTINEL_ID:
+		case PRODUCTION_CLAIM_MANAGER_SENTINEL_ID:
+		case PRODUCTION_CLAIM_DEPOSIT_SENTINEL_ID:
+			return event.secrets.OPENQ_INVOICING_SERVER_PRODUCTION;
+		default:
+			throw new Error('Incorrect Environment');
+	}
+};
+
 module.exports = {
 	getBaseUrl,
 	getBotUrl,
 	getOpenQApiSecret,
 	getGithubBotSecret,
+	getInvoiceUrl,
 	STAGING_OPENQ_SENTINEL_ID,
 	STAGING_CLAIM_MANAGER_SENTINEL_ID,
 	STAGING_DEPOSIT_MANAGER_SENTINEL_ID,
