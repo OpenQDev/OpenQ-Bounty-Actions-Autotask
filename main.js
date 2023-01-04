@@ -25,6 +25,7 @@ const main = async (
 			openqApiSecret = getOpenQApiSecret(id, event);
 			githubBotSecret = getGithubBotSecret(id, event);
 			invoiceUrl = getInvoiceUrl(id, event)
+			console.log('invoiceUrl', invoiceUrl)
 			pat = event.secrets.PAT||process.env.PAT;
 		} catch (error) {
 			reject(error);
