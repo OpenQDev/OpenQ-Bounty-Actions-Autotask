@@ -10,6 +10,8 @@ const main = async (
 		const payload = event.request.body;
 		const { matchReasons, sentinel } = payload;
 		const { id } = sentinel;
+		console.log('matchReasons', matchReasons)
+		console.log('matchReasons[0].signature', matchReasons[0].signature)
 		const eventType = matchReasons[0].signature.replace(/ *\([^)]*\) */g, "");
 
 		let baseUrl;
