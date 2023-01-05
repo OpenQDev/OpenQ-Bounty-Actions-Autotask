@@ -31,7 +31,6 @@ const bountyUpdater = async (
 	return new Promise(async (resolve, reject) => {
 		try {
 			let result = null;
-			console.log('eventType', eventType)
 			switch (eventType) {
 				case 'BountyCreated': {
 					const { bountyAddress, bountyId, organization, bountyType } = params;

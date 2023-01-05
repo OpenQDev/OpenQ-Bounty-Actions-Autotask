@@ -10,8 +10,6 @@ const main = async (
 		const payload = event.request.body;
 		const { matchReasons, sentinel } = payload;
 		const { id } = sentinel;
-		console.log('matchReasons', matchReasons);
-		console.log('matchReasons[0].signature', matchReasons[0].signature);
 
 		let baseUrl;
 		let botUrl;
@@ -25,7 +23,6 @@ const main = async (
 			openqApiSecret = getOpenQApiSecret(id, event);
 			githubBotSecret = getGithubBotSecret(id, event);
 			 invoiceUrl = getInvoiceUrl(id, event);
-			console.log('invoiceUrl', invoiceUrl);
 			pat = event.secrets.PAT || process.env.PAT;
 		} catch (error) {
 			reject(error);

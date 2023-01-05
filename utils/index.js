@@ -78,19 +78,19 @@ const getGithubBotSecret = (autotaskId, event) => {
 	}
 };
 
-const getInvoiceUrl = (autotaskId, event) => {
+const getInvoiceUrl = (autotaskId) => {
 	let baseUrl = null;
 	switch (autotaskId) {
 		case LOCAL_EVENT_LISTENER_ID:
-			return event.secrets.OPENQ_INVOICING_SERVER;
+			return 'http://openq-invoice-server:3007';
 		case STAGING_OPENQ_SENTINEL_ID:
 		case STAGING_CLAIM_MANAGER_SENTINEL_ID:
 		case STAGING_DEPOSIT_MANAGER_SENTINEL_ID:
-			return event.secrets.OPENQ_INVOICING_SERVER_STAGING;
+			return 'https://staging.openq.dev/invoice'
 		case PRODUCTION_OPENQ_SENTINEL_ID:
 		case PRODUCTION_CLAIM_MANAGER_SENTINEL_ID:
 		case PRODUCTION_CLAIM_DEPOSIT_SENTINEL_ID:
-			return event.secrets.OPENQ_INVOICING_SERVER_PRODUCTION;
+			return 'https://openq.dev/invoice';
 		default:
 			throw new Error('Incorrect Environment');
 	}
