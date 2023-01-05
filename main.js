@@ -15,6 +15,7 @@ const main = async (
 
 		let baseUrl;
 		let botUrl;
+		let invoiceUrl;
 		let openqApiSecret;
 		let githubBotSecret;
 		let pat;
@@ -23,7 +24,7 @@ const main = async (
 			botUrl = getBotUrl(id);
 			openqApiSecret = getOpenQApiSecret(id, event);
 			githubBotSecret = getGithubBotSecret(id, event);
-			const invoiceUrl = getInvoiceUrl(id, event);
+			 invoiceUrl = getInvoiceUrl(id, event);
 			console.log('invoiceUrl', invoiceUrl);
 			pat = event.secrets.PAT || process.env.PAT;
 		} catch (error) {
@@ -43,18 +44,20 @@ const main = async (
 					const eventType = getEventType(matchReasons[i].signature);
 					if (eventType === 'ClaimSuccess') {
 						try {
-							await bountyUpdater(eventType, baseUrl, openqApiSecret, matchReasons[i].params, pat);
+							await bountyUpdater(eventType, baseUrl, openqApiSecret, matchReasons[i].params, pat, invoiceUrl);
+
 						} catch (error) {
 							console.error(error);
 						}
 					}
 					else {
-						openQApiResult = await bountyUpdater(eventType, baseUrl, openqApiSecret, matchReasons[i].params, pat);
+						openQApiResult = await bountyUpdater(eventType, baseUrl, openqApiSecret, matchReasons[i].params, pat, invoiceUrl);
 					}
 
 				}
 
 			}
+			else{openQApiResult = await bountyUpdater(eventType, baseUrl, openqApiSecret, matchReasons[0].params, pat, invoiceUrl);}
 		} catch (error) {
 			reject(error);
 		}
