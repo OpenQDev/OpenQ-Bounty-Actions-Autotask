@@ -1,11 +1,11 @@
 const axios = require('axios');
-
+const getValueFromBalanceImpl = require('./getValueFromBalance.js');
 const createNewBountyImpl = require('./createNewBounty');
 const getIssueImpl = require('./getIssue');
-const addToBountyImpl = require('./addToBounty');
+const getTokenReq = require('./getTokenReq');
+const updateBountyValuationImpl = require('./updateBountyValuation');
 const getCategory = require("./getCategory");
 const { ethers } = require("ethers");
-const addToValueClaimed = require('./addToValueClaimed ');
 const createNewRepository = require('./createNewRepository');
 
 /**
@@ -24,14 +24,16 @@ const bountyUpdater = async (
 	params,
 	pat,
 	invoiceUrl,
+	coinApiUrl,
 	getIssue = getIssueImpl,
 	createNewBounty = createNewBountyImpl,
-	addToBounty = addToBountyImpl
+	updateBountyValuation = updateBountyValuationImpl,
+	getValueFromBalance = getValueFromBalanceImpl,
+
 ) => {
 	return new Promise(async (resolve, reject) => {
 		try {
 			let result = null;
-			console.log('eventType', eventType)
 			switch (eventType) {
 				case 'BountyCreated': {
 					const { bountyAddress, bountyId, organization, bountyType } = params;
@@ -69,17 +71,23 @@ const bountyUpdater = async (
 				case 'TokenDepositReceived': {
 					const { volume, tokenAddress, bountyAddress } = params;
 					try {
-						result = await addToBounty(baseUrl, openqApiSecret, { volume: parseFloat(ethers.utils.formatUnits(volume, 0)), tokenAddress }, bountyAddress, true);
+
+						const tokenReq = getTokenReq(tokenAddress, volume);
+						const total = await getValueFromBalance(tokenReq, coinApiUrl);
+						result = await updateBountyValuation(baseUrl, openqApiSecret, {tvc:0,  tvl: total, address: bountyAddress, });
 					} catch (error) {
-						console.error('error creating new bounty', JSON.stringify(error));
-						reject(new Error('ERROR UPDATING BOUNTY'));
+						console.error('error funding bounty', JSON.stringify(error), bountyAddress, tokenAddress);
+						//	reject(new Error('ERROR UPDATING BOUNTY'));
 					}
 					return resolve(result);
 				}
 				case 'DepositRefunded': {
 					const { bountyAddress, tokenAddress, volume } = params;
 					try {
-						result = await addToBounty(baseUrl, openqApiSecret, { volume: parseFloat(ethers.utils.formatUnits(volume, 0)), tokenAddress }, bountyAddress, false);
+
+						const tokenReq = getTokenReq(tokenAddress, volume);
+						const total = await getValueFromBalance(tokenReq, coinApiUrl);
+						result = await updateBountyValuation(baseUrl, openqApiSecret, {tvc:0,  tvl: total * -1, address: bountyAddress, });
 					} catch (error) {
 						console.error('ERROR UPDATING BOUNTY', JSON.stringify(error));
 						reject(new Error('Unknown Event'));
@@ -89,17 +97,18 @@ const bountyUpdater = async (
 				case 'TokenBalanceClaimed': {
 					const { bountyAddress, tokenAddress, volume } = params;
 					try {
-					const message = await axios.post(`${invoiceUrl}/email`, params);
-					console.log(message)
+						const message = await axios.post(`${invoiceUrl}/email`, params);
+						console.log(message);
 					}
 					catch (error) {
 						console.log(error);
 					}
 					try {
-						result = await addToValueClaimed(baseUrl, openqApiSecret, { volume: ethers.utils.formatUnits(volume, 0), tokenAddress, address: bountyAddress, add: true });
+						const tokenReq = getTokenReq(tokenAddress, volume);
+						const total = await getValueFromBalance(tokenReq, coinApiUrl);
+						result = await updateBountyValuation(baseUrl, openqApiSecret, { tvc: total, tvl: 0, address: bountyAddress, });
 					} catch (error) {
-						console.error('ERROR UPDATING BOUNTY', JSON.stringify(error));
-						reject(new Error('Unknown Event'));
+						console.log(error);
 					}
 					return resolve(result);
 				}
@@ -107,7 +116,7 @@ const bountyUpdater = async (
 					return resolve({});
 				}
 				default: {
-					reject(new Error('Unknown Event'));
+					reject(new Error(`Unknown Event: ${eventType}`));
 				}
 			}
 		} catch (error) {

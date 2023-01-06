@@ -25,7 +25,7 @@ app.post('/', async (req, res) => {
 
 		console.log(result);
 	} catch (error) {
-		res.status(500).json(error);
+		console.log(error);
 	}
 });
 

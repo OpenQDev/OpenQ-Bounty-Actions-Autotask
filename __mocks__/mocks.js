@@ -4,11 +4,15 @@ const mockGetIssue = async (issueId) => {
 	});
 };
 
-const mockCreateNewBounty = async (baseUrl, openqApiSecret, bountyAddress, bountyId, organization, category, type) => {
+const mockCreateNewBounty = async (baseUrl, openqApiSecret, bountyAddress, bountyId, organization, repoId,  category, bountyType) => {
 	return new Promise((resolve, reject) => {
-		return resolve({ baseUrl, openqApiSecret, bountyAddress, bountyId, organization, category, type });
+		return resolve({ baseUrl, openqApiSecret, bountyAddress, bountyId, organization, category, bountyType });
 	});
 };
+
+mockUpdateBountyValuation = async (baseUrl, openqApiSecret, variables) => {
+	return {baseUrl, openqApiSecret, variables}
+}
 
 const mockAddToBounty = async (baseUrl, openqApiSecret, tokenBalance, address, add) => {
 	return new Promise((resolve, reject) => {
@@ -28,4 +32,8 @@ const mockGithubBot = async (botUrl, eventType, githubBotSecret, params) => {
 	});
 };
 
-module.exports = { mockGetIssue, mockCreateNewBounty, mockAddToBounty, mockBountyUpdater, mockGithubBot };
+const  mockGetValueFromBalance = async (coinAPIReq, coinApiUrl) => {
+	return {coinAPIReq, coinApiUrl}
+}
+
+module.exports = { mockGetIssue, mockCreateNewBounty, mockAddToBounty, mockBountyUpdater, mockGithubBot, mockGetValueFromBalance, mockUpdateBountyValuation };
