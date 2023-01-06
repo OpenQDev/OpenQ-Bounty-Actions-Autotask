@@ -86,11 +86,29 @@ const getInvoiceUrl = (autotaskId) => {
 		case STAGING_OPENQ_SENTINEL_ID:
 		case STAGING_CLAIM_MANAGER_SENTINEL_ID:
 		case STAGING_DEPOSIT_MANAGER_SENTINEL_ID:
-			return 'https://staging.openq.dev/invoice'
+			return 'https://staging.openq.dev/invoice';
 		case PRODUCTION_OPENQ_SENTINEL_ID:
 		case PRODUCTION_CLAIM_MANAGER_SENTINEL_ID:
 		case PRODUCTION_CLAIM_DEPOSIT_SENTINEL_ID:
 			return 'https://openq.dev/invoice';
+		default:
+			throw new Error('Incorrect Environment');
+	}
+};
+
+const getCoinApiUrl = (autotaskId) => {
+	let baseUrl = null;
+	switch (autotaskId) {
+		case LOCAL_EVENT_LISTENER_ID:
+			return 'http://openq-coinapi:8081/tvl';
+		case STAGING_OPENQ_SENTINEL_ID:
+		case STAGING_CLAIM_MANAGER_SENTINEL_ID:
+		case STAGING_DEPOSIT_MANAGER_SENTINEL_ID:
+			return 'https://staging.openq.dev/tvl';
+		case PRODUCTION_OPENQ_SENTINEL_ID:
+		case PRODUCTION_CLAIM_MANAGER_SENTINEL_ID:
+		case PRODUCTION_CLAIM_DEPOSIT_SENTINEL_ID:
+			return 'https://openq.dev/tvl';
 		default:
 			throw new Error('Incorrect Environment');
 	}
@@ -102,6 +120,7 @@ module.exports = {
 	getOpenQApiSecret,
 	getGithubBotSecret,
 	getInvoiceUrl,
+	getCoinApiUrl,
 	STAGING_OPENQ_SENTINEL_ID,
 	STAGING_CLAIM_MANAGER_SENTINEL_ID,
 	STAGING_DEPOSIT_MANAGER_SENTINEL_ID,

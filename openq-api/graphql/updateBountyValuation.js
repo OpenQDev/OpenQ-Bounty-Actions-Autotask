@@ -4,8 +4,9 @@ const UPDATE_BOUNTY = `
 		$tvl: Float
 		$tvc: Float
 	) {
-		updateBounty(
+		updateBountyValuation(
 			address: $address
+			type: $type
 			tvl: $tvl
 			tvc: $tvc
 		) {
@@ -13,5 +14,6 @@ const UPDATE_BOUNTY = `
 		}
 	}
 `;
+
 
 module.exports = UPDATE_BOUNTY;
