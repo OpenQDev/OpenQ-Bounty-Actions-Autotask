@@ -1,12 +1,11 @@
-const UPDATE_BOUNTY = `
-	mutation Mutation(
+const UPDATE_BOUNTY_VALUATION = `
+	mutation UpdateBountyValuation(
 		$address: String!
 		$tvl: Float
 		$tvc: Float
 	) {
 		updateBountyValuation(
 			address: $address
-			type: $type
 			tvl: $tvl
 			tvc: $tvc
 		) {
@@ -16,4 +15,4 @@ const UPDATE_BOUNTY = `
 `;
 
 
-module.exports = UPDATE_BOUNTY;
+module.exports = UPDATE_BOUNTY_VALUATION;

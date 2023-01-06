@@ -8,14 +8,16 @@ const updateBountyValuation = async (baseUrl, openqApiSecret, variables) => {
 				.post(
 					`${baseUrl}/graphql`,
 					{
-						mutation: UPDATE_BOUNTY_VALUATION,
+						query: UPDATE_BOUNTY_VALUATION,
 						variables
 					},
+
 					{
 						headers: {
 							'Authorization': openqApiSecret,
 						},
 					}
+
 				);
 			return resolve(result.data);
 		} catch (error) {

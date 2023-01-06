@@ -74,9 +74,9 @@ const bountyUpdater = async (
 
 						const tokenReq = getTokenReq(tokenAddress, volume);
 						const total = await getValueFromBalance(tokenReq, coinApiUrl);
-						result = await updateBountyValuation(baseUrl, openqApiSecret, { tvl: total, address: bountyAddress, });
+						result = await updateBountyValuation(baseUrl, openqApiSecret, {tvc:0,  tvl: total, address: bountyAddress, });
 					} catch (error) {
-						console.error('error creating new bounty', JSON.stringify(error), bountyAddress, tokenAddress);
+						console.error('error funding bounty', JSON.stringify(error), bountyAddress, tokenAddress);
 						//	reject(new Error('ERROR UPDATING BOUNTY'));
 					}
 					return resolve(result);
@@ -87,7 +87,7 @@ const bountyUpdater = async (
 
 						const tokenReq = getTokenReq(tokenAddress, volume);
 						const total = await getValueFromBalance(tokenReq, coinApiUrl);
-						result = await updateBountyValuation(baseUrl, openqApiSecret, { tvl: total * -1, address: bountyAddress, });
+						result = await updateBountyValuation(baseUrl, openqApiSecret, {tvc:0,  tvl: total * -1, address: bountyAddress, });
 					} catch (error) {
 						console.error('ERROR UPDATING BOUNTY', JSON.stringify(error));
 						reject(new Error('Unknown Event'));

@@ -43,20 +43,20 @@ const main = async (
 					const eventType = getEventType(matchReasons[i].signature);
 					if (eventType === 'ClaimSuccess') {
 						try {
-							await bountyUpdater(eventType, baseUrl, openqApiSecret, matchReasons[i].params, pat, invoiceUrl);
+							await bountyUpdater(eventType, baseUrl, openqApiSecret, matchReasons[i].params, pat, invoiceUrl, coinApiUrl);
 
 						} catch (error) {
 							console.error(error);
 						}
 					}
 					else {
-						openQApiResult = await bountyUpdater(eventType, baseUrl, openqApiSecret, matchReasons[i].params, pat, invoiceUrl);
+						openQApiResult = await bountyUpdater(eventType, baseUrl, openqApiSecret, matchReasons[i].params, pat, invoiceUrl, coinApiUrl);
 					}
 
 				}
 
 			}
-			else{openQApiResult = await bountyUpdater(eventType, baseUrl, openqApiSecret, matchReasons[0].params, pat, invoiceUrl);}
+			else{openQApiResult = await bountyUpdater(eventType, baseUrl, openqApiSecret, matchReasons[0].params, pat, invoiceUrl, coinApiUrl);}
 		} catch (error) {
 			reject(error);
 		}
