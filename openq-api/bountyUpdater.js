@@ -5,6 +5,7 @@ const getIssueImpl = require('./getIssue');
 const getTokenReq = require('./getTokenReq');
 const updateBountyValuationImpl = require('./updateBountyValuation');
 const getCategory = require("./getCategory");
+const decodeData = require("./decodeData");
 const { ethers } = require("ethers");
 const createNewRepository = require('./createNewRepository');
 
@@ -36,7 +37,8 @@ const bountyUpdater = async (
 			let result = null;
 			switch (eventType) {
 				case 'BountyCreated': {
-					const { bountyAddress, bountyId, organization, bountyType } = params;
+					const { bountyAddress, bountyId, organization, bountyType, data } = params;
+					const minterUuid = decodeData(data, bountyType)
 					const type = ethers.BigNumber.from(bountyType).toString();
 					let category;
 
@@ -50,7 +52,7 @@ const bountyUpdater = async (
 					}
 
 					try {
-						result = await createNewBounty(baseUrl, openqApiSecret, bountyAddress, bountyId, organization, bountyRepositoryId, category, type);
+						result = await createNewBounty(baseUrl, openqApiSecret, bountyAddress, bountyId, organization, bountyRepositoryId, category, type, minterUuid);
 					} catch (error) {
 						console.error('error creating new bounty', JSON.stringify(error));
 						reject(new Error('ERROR CREATING NEW BOUNTY'));
