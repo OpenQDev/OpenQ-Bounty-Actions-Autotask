@@ -7,7 +7,6 @@ const updateBountyValuationImpl = require('./updateBountyValuation');
 const getCategory = require("./getCategory");
 const decodeData = require("./decodeData");
 const { ethers } = require("ethers");
-const createNewRepository = require('./createNewRepository');
 
 /**
  * bountyUpdater takes in an event type and responds by creating a new Bounty document in OpenQ-API if it is a 
@@ -39,6 +38,7 @@ const bountyUpdater = async (
 				case 'BountyCreated': {
 					const { bountyAddress, bountyId, organization, bountyType, data } = params;
 					const minterUuid = decodeData(data, bountyType)
+					console.log(minterUuid)
 					const type = ethers.BigNumber.from(bountyType).toString();
 					let category;
 
@@ -58,16 +58,7 @@ const bountyUpdater = async (
 						reject(new Error('ERROR CREATING NEW BOUNTY'));
 					}
 
-					const isContest = bountyType == 2 || bountyType == 3;
-					if (isContest) {
-						try {
-							result = await createNewRepository(baseUrl, openqApiSecret, organization, bountyRepositoryId, bountyId);
-						} catch (error) {
-							console.error('error creating new contest', JSON.stringify(error));
-							reject(new Error('ERROR CREATING NEW CONTEST'));
-						}
-					}
-
+				
 					return resolve(result);
 				}
 				case 'TokenDepositReceived': {

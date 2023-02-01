@@ -41,17 +41,9 @@ const main = async (
 			if (isClaim) {
 				for (let i = 0; i < matchReasons.length; i++) {
 					const eventType = getEventType(matchReasons[i].signature);
-					if (eventType === 'ClaimSuccess') {
-						try {
-							await bountyUpdater(eventType, baseUrl, openqApiSecret, matchReasons[i].params, pat, invoiceUrl, coinApiUrl);
-
-						} catch (error) {
-							console.error(error);
-						}
-					}
-					else {
+					
 						openQApiResult = await bountyUpdater(eventType, baseUrl, openqApiSecret, matchReasons[i].params, pat, invoiceUrl, coinApiUrl);
-					}
+					
 
 				}
 
