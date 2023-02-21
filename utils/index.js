@@ -19,7 +19,7 @@ const getBaseUrl = (autotaskId) => {
 		case PRODUCTION_OPENQ_SENTINEL_ID:
 		case PRODUCTION_CLAIM_MANAGER_SENTINEL_ID:
 		case PRODUCTION_CLAIM_DEPOSIT_SENTINEL_ID:
-			return 'https://app.openq.dev/api';
+			return 'https://www.openq.dev/api';
 		default:
 			throw new Error('Incorrect Environment');
 	}
@@ -36,7 +36,7 @@ const getBotUrl = (autotaskId) => {
 		case PRODUCTION_OPENQ_SENTINEL_ID:
 		case PRODUCTION_CLAIM_MANAGER_SENTINEL_ID:
 		case PRODUCTION_CLAIM_DEPOSIT_SENTINEL_ID:
-			return 'https://app.openq.dev/githubbot';
+			return 'https://www.openq.dev/githubbot';
 		default:
 			throw new Error('Incorrect Environment');
 	}
