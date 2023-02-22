@@ -19,7 +19,7 @@ const getBaseUrl = (autotaskId) => {
 		case PRODUCTION_OPENQ_SENTINEL_ID:
 		case PRODUCTION_CLAIM_MANAGER_SENTINEL_ID:
 		case PRODUCTION_CLAIM_DEPOSIT_SENTINEL_ID:
-			return 'https://openq.dev/api';
+			return 'https://www.openq.dev/api';
 		default:
 			throw new Error('Incorrect Environment');
 	}
@@ -36,7 +36,7 @@ const getBotUrl = (autotaskId) => {
 		case PRODUCTION_OPENQ_SENTINEL_ID:
 		case PRODUCTION_CLAIM_MANAGER_SENTINEL_ID:
 		case PRODUCTION_CLAIM_DEPOSIT_SENTINEL_ID:
-			return 'https://openq.dev/githubbot';
+			return 'https://www.openq.dev/githubbot';
 		default:
 			throw new Error('Incorrect Environment');
 	}
@@ -90,7 +90,7 @@ const getInvoiceUrl = (autotaskId) => {
 		case PRODUCTION_OPENQ_SENTINEL_ID:
 		case PRODUCTION_CLAIM_MANAGER_SENTINEL_ID:
 		case PRODUCTION_CLAIM_DEPOSIT_SENTINEL_ID:
-			return 'https://openq.dev/invoice';
+			return 'https://www.openq.dev/invoice';
 		default:
 			throw new Error('Incorrect Environment');
 	}
@@ -108,7 +108,7 @@ const getCoinApiUrl = (autotaskId) => {
 		case PRODUCTION_OPENQ_SENTINEL_ID:
 		case PRODUCTION_CLAIM_MANAGER_SENTINEL_ID:
 		case PRODUCTION_CLAIM_DEPOSIT_SENTINEL_ID:
-			return 'https://openq.dev/tvl';
+			return 'https://www.openq.dev/tvl';
 		default:
 			throw new Error('Incorrect Environment');
 	}
