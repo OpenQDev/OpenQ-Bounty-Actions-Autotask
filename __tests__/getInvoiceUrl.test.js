@@ -10,11 +10,11 @@ const { getInvoiceUrl,
 
 describe('getInvoiceUrl', () => {
 	it('returns correct base url for each environment', () => {
-		expect(getInvoiceUrl(STAGING_OPENQ_SENTINEL_ID)).toEqual('https://staging.openq.dev/invoice');
-		expect(getInvoiceUrl(STAGING_CLAIM_MANAGER_SENTINEL_ID)).toEqual('https://staging.openq.dev/invoice');
-		expect(getInvoiceUrl(STAGING_DEPOSIT_MANAGER_SENTINEL_ID)).toEqual('https://staging.openq.dev/invoice');
+		expect(getInvoiceUrl(STAGING_OPENQ_SENTINEL_ID)).toEqual('https://staging.openq.dev/email');
+		expect(getInvoiceUrl(STAGING_CLAIM_MANAGER_SENTINEL_ID)).toEqual('https://staging.openq.dev/email');
+		expect(getInvoiceUrl(STAGING_DEPOSIT_MANAGER_SENTINEL_ID)).toEqual('https://staging.openq.dev/email');
 
-		expect(getInvoiceUrl(PRODUCTION_CLAIM_DEPOSIT_SENTINEL_ID)).toEqual('https://www.openq.dev/invoice');
+		expect(getInvoiceUrl(PRODUCTION_CLAIM_DEPOSIT_SENTINEL_ID)).toEqual('https://www.openq.dev/email');
 		expect(getInvoiceUrl(LOCAL_EVENT_LISTENER_ID)).toEqual('http://openq-invoice-server:3007');
 	});
 });
