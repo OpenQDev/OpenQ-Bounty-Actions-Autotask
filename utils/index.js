@@ -86,11 +86,11 @@ const getInvoiceUrl = (autotaskId) => {
 		case STAGING_OPENQ_SENTINEL_ID:
 		case STAGING_CLAIM_MANAGER_SENTINEL_ID:
 		case STAGING_DEPOSIT_MANAGER_SENTINEL_ID:
-			return 'https://staging.openq.dev/invoice';
+			return 'https://staging.openq.dev/email';
 		case PRODUCTION_OPENQ_SENTINEL_ID:
 		case PRODUCTION_CLAIM_MANAGER_SENTINEL_ID:
 		case PRODUCTION_CLAIM_DEPOSIT_SENTINEL_ID:
-			return 'https://www.openq.dev/invoice';
+			return 'https://www.openq.dev/email';
 		default:
 			throw new Error('Incorrect Environment');
 	}
