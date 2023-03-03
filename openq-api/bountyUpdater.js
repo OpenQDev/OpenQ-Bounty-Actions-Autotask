@@ -89,13 +89,7 @@ const bountyUpdater = async (
 				}
 				case 'TokenBalanceClaimed': {
 					const { bountyAddress, tokenAddress, volume } = params;
-					try {
-						const message = await axios.post(`${invoiceUrl}/email`, params);
-						console.log(message);
-					}
-					catch (error) {
-						console.log(error);
-					}
+					
 					try {
 						const tokenReq = getTokenReq(tokenAddress, volume);
 						const total = await getValueFromBalance(tokenReq, coinApiUrl);
