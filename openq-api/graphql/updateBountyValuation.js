@@ -10,6 +10,8 @@ const UPDATE_BOUNTY_VALUATION = `
 			tvc: $tvc
 		) {
 			address
+			tvl
+			tvc
 		}
 	}
 `;
