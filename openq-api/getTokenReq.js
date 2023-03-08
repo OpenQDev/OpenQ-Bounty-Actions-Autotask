@@ -6,12 +6,9 @@ const  { ethers } = require('ethers' );
   function getTokenReq(address, volume) {
   const formattedVolume = ethers.utils.formatUnits(volume, 0);
     const checkSummedAddress = ethers.utils.getAddress(address);
-    const lowerCaseAddress = address.toLowerCase();
  let token={}
     if (openqIndexableTokens[checkSummedAddress]) {
       token =  openqIndexableTokens[checkSummedAddress];
-    } else if (openqIndexableTokens[lowerCaseAddress]) {
-      token =  openqIndexableTokens[lowerCaseAddress];
     }
     else{
     token =  {
