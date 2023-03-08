@@ -1,8 +1,7 @@
 const {ethers} = require('ethers');
 const decodeData = (encodedData, bountyType)=>{
-	console.log(bountyType);
+	
 		let abiCoder = new ethers.utils.AbiCoder();
-		console.log(bountyType)
 		switch (bountyType.hex) {
 			case "0x00":
 			  {

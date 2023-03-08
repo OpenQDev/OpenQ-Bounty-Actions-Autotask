@@ -37,8 +37,7 @@ const bountyUpdater = async (
 			switch (eventType) {
 				case 'BountyCreated': {
 					const { bountyAddress, bountyId, organization, bountyType, data } = params;
-					const minterUuid = decodeData(data, bountyType)
-					console.log(minterUuid)
+					const minterUuid = decodeData(data, bountyType);
 					const type = ethers.BigNumber.from(bountyType).toString();
 					let category;
 

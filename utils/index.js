@@ -104,11 +104,11 @@ const getCoinApiUrl = (autotaskId) => {
 		case STAGING_OPENQ_SENTINEL_ID:
 		case STAGING_CLAIM_MANAGER_SENTINEL_ID:
 		case STAGING_DEPOSIT_MANAGER_SENTINEL_ID:
-			return 'https://staging.openq.dev/tvl';
+			return 'https://staging.openq.dev/coinapi/tvl';
 		case PRODUCTION_OPENQ_SENTINEL_ID:
 		case PRODUCTION_CLAIM_MANAGER_SENTINEL_ID:
 		case PRODUCTION_CLAIM_DEPOSIT_SENTINEL_ID:
-			return 'https://www.openq.dev/tvl';
+			return 'https://www.openq.dev/coinapi/tvl';
 		default:
 			throw new Error('Incorrect Environment');
 	}
