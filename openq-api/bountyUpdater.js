@@ -147,6 +147,7 @@ const bountyUpdater = async (
           const bountyAddress = params.bountyAddress;
           const state = bool ? "CLOSED" : "OPEN";
           const result = await updateRequestStateToClosed(
+            
             baseUrl,
             openqApiSecret,
             { requestingUserId, bountyAddress, state }
