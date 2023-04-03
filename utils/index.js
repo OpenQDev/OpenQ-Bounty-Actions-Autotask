@@ -6,6 +6,7 @@ const STAGING_SUPPORTING_DOCS_EVENT_SENTINEL_ID = "0600a55d-1e0d-4589-863c-a8a31
 const PRODUCTION_OPENQ_SENTINEL_ID = "98e94c27-c43a-460e-a892-1d57c2f768f8";
 const PRODUCTION_CLAIM_MANAGER_SENTINEL_ID = "49c5abc4-3fbc-461d-8587-53775d7524d0";
 const PRODUCTION_CLAIM_DEPOSIT_SENTINEL_ID = "8d34ffd0-ddd4-4008-97fd-99883c77714b";
+const PRODUCTION_SUPPORTING_DOCS_EVENT_SENTINEL_ID = "f5cd6085-0e42-478e-8043-a802fd2dc568";
 
 const LOCAL_EVENT_LISTENER_ID = 'local';
 
@@ -22,6 +23,7 @@ const getBaseUrl = (autotaskId) => {
 		case PRODUCTION_OPENQ_SENTINEL_ID:
 		case PRODUCTION_CLAIM_MANAGER_SENTINEL_ID:
 		case PRODUCTION_CLAIM_DEPOSIT_SENTINEL_ID:
+		case PRODUCTION_SUPPORTING_DOCS_EVENT_SENTINEL_ID:
 			return 'https://openq.dev/api';
 		default:
 			throw new Error('Incorrect Environment');
@@ -40,6 +42,7 @@ const getBotUrl = (autotaskId) => {
 		case PRODUCTION_OPENQ_SENTINEL_ID:
 		case PRODUCTION_CLAIM_MANAGER_SENTINEL_ID:
 		case PRODUCTION_CLAIM_DEPOSIT_SENTINEL_ID:
+		case PRODUCTION_SUPPORTING_DOCS_EVENT_SENTINEL_ID:
 			return 'https://openq.dev/githubbot';
 		default:
 			throw new Error('Incorrect Environment');
@@ -59,6 +62,7 @@ const getOpenQApiSecret = (autotaskId, event) => {
 		case PRODUCTION_OPENQ_SENTINEL_ID:
 		case PRODUCTION_CLAIM_MANAGER_SENTINEL_ID:
 		case PRODUCTION_CLAIM_DEPOSIT_SENTINEL_ID:
+		case PRODUCTION_SUPPORTING_DOCS_EVENT_SENTINEL_ID:
 			return event.secrets.OPENQ_API_SECRET_PRODUCTION;
 		default:
 			throw new Error('Incorrect Environment');
@@ -78,6 +82,7 @@ const getGithubBotSecret = (autotaskId, event) => {
 		case PRODUCTION_OPENQ_SENTINEL_ID:
 		case PRODUCTION_CLAIM_MANAGER_SENTINEL_ID:
 		case PRODUCTION_CLAIM_DEPOSIT_SENTINEL_ID:
+		case PRODUCTION_SUPPORTING_DOCS_EVENT_SENTINEL_ID:
 			return event.secrets.GITHUB_BOT_SECRET_PRODUCTION;
 		default:
 			throw new Error('Incorrect Environment');
@@ -97,6 +102,7 @@ const getInvoiceUrl = (autotaskId) => {
 		case PRODUCTION_OPENQ_SENTINEL_ID:
 		case PRODUCTION_CLAIM_MANAGER_SENTINEL_ID:
 		case PRODUCTION_CLAIM_DEPOSIT_SENTINEL_ID:
+		case PRODUCTION_SUPPORTING_DOCS_EVENT_SENTINEL_ID:
 			return 'https://www.openq.dev/email';
 		default:
 			throw new Error('Incorrect Environment');
@@ -116,6 +122,7 @@ const getCoinApiUrl = (autotaskId) => {
 		case PRODUCTION_OPENQ_SENTINEL_ID:
 		case PRODUCTION_CLAIM_MANAGER_SENTINEL_ID:
 		case PRODUCTION_CLAIM_DEPOSIT_SENTINEL_ID:
+		case PRODUCTION_SUPPORTING_DOCS_EVENT_SENTINEL_ID:
 			return 'https://www.openq.dev/coinapi/tvl';
 		default:
 			throw new Error('Incorrect Environment');
@@ -142,5 +149,6 @@ module.exports = {
 	PRODUCTION_OPENQ_SENTINEL_ID,
 	PRODUCTION_CLAIM_MANAGER_SENTINEL_ID,
 	PRODUCTION_CLAIM_DEPOSIT_SENTINEL_ID,
+	PRODUCTION_SUPPORTING_DOCS_EVENT_SENTINEL_ID,
 	LOCAL_EVENT_LISTENER_ID
 };
