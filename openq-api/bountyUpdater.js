@@ -102,7 +102,7 @@ const bountyUpdater = async (
 					return resolve({});
 				}
 				default: {
-					reject(new Error(`Unknown Event: ${eventType}`));
+					return resolve({ error: `Unknown Event: ${eventType}` });
 				}
 			}
 		} catch (error) {
