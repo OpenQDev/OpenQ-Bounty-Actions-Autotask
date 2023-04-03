@@ -1,4 +1,4 @@
-const { getBaseUrl, getBotUrl, getOpenQApiSecret, getGithubBotSecret, getInvoiceUrl, getCoinApiUrl } = require('./utils');
+const { getBaseUrl, getBotUrl, getOpenQApiSecret, getGithubBotSecret, getInvoiceUrl, getCoinApiUrl, getEventType } = require('./utils');
 const bountyUpdaterImpl = require('./openq-api/bountyUpdater');
 const postGithubCommentImpl = require('./github-bot/postGithubComment');
 
@@ -30,36 +30,19 @@ const main = async (
 			reject(error);
 		}
 
+		let openQApiResults = [];
 		try {
-			const getEventType = (signature) => {
-				const eventType = signature.replace(/ *\([^)]*\) */g, "");
-				return eventType;
-			};
-			const eventType = getEventType(matchReasons[0].signature);
-			const isClaim = eventType === 'ClaimSuccess';
-
-			if (isClaim) {
-				for (let i = 0; i < matchReasons.length; i++) {
-					const eventType = getEventType(matchReasons[i].signature);
-					
-						openQApiResult = await bountyUpdater(eventType, baseUrl, openqApiSecret, matchReasons[i].params, pat, invoiceUrl, coinApiUrl);
-					
-
-				}
-
+			for (matchReason of matchReasons) {
+				const eventType = getEventType(matchReason.signature);
+				const { params } = matchReason
+				let openQApiResult = await bountyUpdater(eventType, baseUrl, openqApiSecret, params, pat, invoiceUrl, coinApiUrl);
+				openQApiResults.push(openQApiResult)
 			}
-			else{openQApiResult = await bountyUpdater(eventType, baseUrl, openqApiSecret, matchReasons[0].params, pat, invoiceUrl, coinApiUrl);}
 		} catch (error) {
 			reject(error);
 		}
 
-		// try {
-		// 	githubBotResult = await postGithubComment(botUrl, eventType, githubBotSecret, matchReasons[0].params);
-		// } catch (error) {
-		// 	console.error(error.response.data.errors);
-		// }
-
-		resolve({ openQApiResult });
+		resolve({ openQApiResults });
 	});
 };
 
