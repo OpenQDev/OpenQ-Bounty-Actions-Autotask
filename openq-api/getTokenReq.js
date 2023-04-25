@@ -27,6 +27,7 @@ const  { ethers } = require('ethers' );
     }
 	const tokenAddress = token.address;
 	const returnToken=  {
+    network: 'polygon-pos',
 		tokenVolumes: {
 			[tokenAddress]: {
       volume: formattedVolume,
