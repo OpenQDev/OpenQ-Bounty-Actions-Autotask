@@ -7,6 +7,8 @@ const CREATE_BOUNTY = `
 		$repositoryId: String!
 		$category: String
 		$creatingUserId: String
+		$title: String
+		$budgetValue: Float!
 	) {
 		createBounty(
 			address: $address
@@ -16,6 +18,8 @@ const CREATE_BOUNTY = `
 			repositoryId: $repositoryId
 			category: $category
 			creatingUserId: $creatingUserId
+			title: $title
+			budgetValue: $budgetValue
 		) {
 			address
 			repositoryId
