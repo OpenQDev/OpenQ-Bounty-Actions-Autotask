@@ -39,9 +39,9 @@ const bountyUpdater = async (
       
         case "BountyCreated": {
           
-          const type = ethers.BigNumber.from(bountyType).toString();
           const { bountyAddress, bountyId, organization, bountyType, data } =
             params;
+          const type = ethers.BigNumber.from(bountyType).toString();
           const decodedInitData = decodeData(data, type);
           const { budgetTokenAddress, volume } =
             getBudgetTokenBalance(decodedInitData, type);
