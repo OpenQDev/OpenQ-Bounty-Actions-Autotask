@@ -14,7 +14,7 @@ describe('getCoinApiUrl', () => {
 		expect(getCoinApiUrl(STAGING_CLAIM_MANAGER_SENTINEL_ID)).toEqual('https://staging.openq.dev/tvl');
 		expect(getCoinApiUrl(STAGING_DEPOSIT_MANAGER_SENTINEL_ID)).toEqual('https://staging.openq.dev/tvl');
 
-		expect(getCoinApiUrl(PRODUCTION_CLAIM_DEPOSIT_SENTINEL_ID)).toEqual('https://www.openq.dev/tvl');
+		expect(getCoinApiUrl(PRODUCTION_CLAIM_DEPOSIT_SENTINEL_ID)).toEqual('https://openq.dev/tvl');
 		expect(getCoinApiUrl(LOCAL_EVENT_LISTENER_ID)).toEqual('http://openq-coinapi:8081/tvl');
 	});
 });

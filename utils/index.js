@@ -103,7 +103,7 @@ const getInvoiceUrl = (autotaskId) => {
 		case PRODUCTION_CLAIM_MANAGER_SENTINEL_ID:
 		case PRODUCTION_CLAIM_DEPOSIT_SENTINEL_ID:
 		case PRODUCTION_SUPPORTING_DOCS_EVENT_SENTINEL_ID:
-			return 'https://www.openq.dev/email';
+			return 'https://openq.dev/email';
 		default:
 			throw new Error('Incorrect Environment');
 	}
@@ -118,12 +118,12 @@ const getCoinApiUrl = (autotaskId) => {
 		case STAGING_CLAIM_MANAGER_SENTINEL_ID:
 		case STAGING_DEPOSIT_MANAGER_SENTINEL_ID:
 		case STAGING_SUPPORTING_DOCS_EVENT_SENTINEL_ID:
-			return 'https://staging.openq.dev/coinapi/tvl';
+			return 'https://staging.openq.dev/tvl';
 		case PRODUCTION_OPENQ_SENTINEL_ID:
 		case PRODUCTION_CLAIM_MANAGER_SENTINEL_ID:
 		case PRODUCTION_CLAIM_DEPOSIT_SENTINEL_ID:
 		case PRODUCTION_SUPPORTING_DOCS_EVENT_SENTINEL_ID:
-			return 'https://www.openq.dev/coinapi/tvl';
+			return 'https://openq.dev/tvl';
 		default:
 			throw new Error('Incorrect Environment');
 	}

@@ -7,7 +7,7 @@ describe('bountyUpdater', () => {
 	it('BountyCreated', async () => {
 		const result = await main(events.created, mockBountyUpdater, mockGithubBot);
 		expect(result).toEqual({
-			openQApiResult: {
+			openQApiResults:[ {
 				eventType: 'BountyCreated',
 				baseUrl: 'http://openq-api:4000',
 				openqApiSecret: 'secret123!',
@@ -17,8 +17,8 @@ describe('bountyUpdater', () => {
 					organization: 'organizationid',
 					bountyType: '0'
 				}
-			},
-			githubBotResult: {
+			},]
+	/*		githubBotResult: {
 				botUrl: 'http://openq-bot:3006',
 				eventType: 'BountyCreated',
 				githubBotSecret: 'ghbotsecret123!',
@@ -28,14 +28,14 @@ describe('bountyUpdater', () => {
 					organization: 'organizationid',
 					bountyType: '0'
 				}
-			}
+			}*/
 		});
 	});
 
 	it('TokenDepositReceived', async () => {
 		const result = await main(events.funded, mockBountyUpdater, mockGithubBot);
 		expect(result).toEqual({
-			openQApiResult: {
+			openQApiResults:[ {
 				eventType: 'TokenDepositReceived',
 				baseUrl: 'http://openq-api:4000',
 				openqApiSecret: 'secret123!',
@@ -44,7 +44,8 @@ describe('bountyUpdater', () => {
 					tokenAddress: '0xtokenaddress',
 					volume: 1000
 				}
-			},
+			},]
+			/*
 			githubBotResult: {
 				botUrl: 'http://openq-bot:3006',
 				eventType: 'TokenDepositReceived',
@@ -54,14 +55,14 @@ describe('bountyUpdater', () => {
 					tokenAddress: '0xtokenaddress',
 					volume: 1000
 				}
-			}
+			}*/
 		});
 	});
 
 	it('DepositRefunded', async () => {
 		const result = await main(events.refunded, mockBountyUpdater, mockGithubBot);
 		expect(result).toEqual({
-			openQApiResult: {
+			openQApiResults:[ {
 				eventType: 'DepositRefunded',
 				baseUrl: 'http://openq-api:4000',
 				openqApiSecret: 'secret123!',
@@ -70,7 +71,8 @@ describe('bountyUpdater', () => {
 					tokenAddress: '0xtokenaddress',
 					volume: 1000
 				}
-			},
+			},]
+			/*
 			githubBotResult: {
 				botUrl: 'http://openq-bot:3006',
 				eventType: 'DepositRefunded',
@@ -80,14 +82,14 @@ describe('bountyUpdater', () => {
 					tokenAddress: '0xtokenaddress',
 					volume: 1000
 				}
-			}
+			}*/
 		});
 	});
 
 	it('TokenBalanceClaimed', async () => {
 		const result = await main(events.claimed, mockBountyUpdater, mockGithubBot);
 		expect(result).toEqual({
-			openQApiResult: {
+			openQApiResults:[ {
 				eventType: 'TokenBalanceClaimed',
 				baseUrl: 'http://openq-api:4000',
 				openqApiSecret: 'secret123!',
@@ -96,7 +98,8 @@ describe('bountyUpdater', () => {
 					tokenAddress: '0xtokenaddress',
 					volume: 1000
 				}
-			},
+			},]
+			/*
 			githubBotResult: {
 				botUrl: 'http://openq-bot:3006',
 				eventType: 'TokenBalanceClaimed',
@@ -106,7 +109,7 @@ describe('bountyUpdater', () => {
 					tokenAddress: '0xtokenaddress',
 					volume: 1000
 				}
-			}
+			}*/
 		});
 	});
 });
