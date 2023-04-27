@@ -32,19 +32,18 @@ const bountyUpdater = async (
   getValueFromBalance = getValueFromBalanceImpl
 ) => {
   return new Promise(async (resolve, reject) => {
-
     try {
       let result = null;
       switch (eventType) {
-      
         case "BountyCreated": {
-          
           const { bountyAddress, bountyId, organization, bountyType, data } =
             params;
           const type = ethers.BigNumber.from(bountyType).toString();
           const decodedInitData = decodeData(data, type);
-          const { budgetTokenAddress, volume } =
-            getBudgetTokenBalance(decodedInitData, type);
+          const { budgetTokenAddress, volume } = getBudgetTokenBalance(
+            decodedInitData,
+            type
+          );
           const { issuerExternalUserId } = decodedInitData;
           const tokenReq = getTokenReq(budgetTokenAddress, volume);
           const budget = await getValueFromBalance(tokenReq, coinApiUrl);
@@ -129,7 +128,7 @@ const bountyUpdater = async (
             const total = await getValueFromBalance(tokenReq, coinApiUrl);
             result = await updateBountyValuation(baseUrl, openqApiSecret, {
               tvc: total,
-              tvl: 0,
+              tvl: total*-1,
               address: bountyAddress,
             });
           } catch (error) {
@@ -137,6 +136,48 @@ const bountyUpdater = async (
           }
           return resolve(result);
         }
+        case "PayoutScheduleUpdated":
+          {
+            try {
+              const { payoutTokenAddress, payoutSchedule, bountyAddress } = params;
+              const bigNumberZero = ethers.BigNumber.from(0);
+              const combinedVolume = payoutSchedule.reduce((acc, cur) => {
+                const bigNumberCur = ethers.BigNumber.from(cur);
+                return bigNumberCur.add(acc);
+              }, bigNumberZero);
+
+              const tokenReq = getTokenReq(payoutTokenAddress, combinedVolume);
+              const total = await getValueFromBalance(tokenReq, coinApiUrl);
+              result = await updateBountyValuation(baseUrl, openqApiSecret, {
+                budgetValue: total,
+                address: bountyAddress,
+              });
+            } catch (error) {
+              console.log(error);
+            }
+            resolve(result);
+          }
+
+          break;
+        case "FundingGoalSet":
+          {
+            try {
+              const { fundingGoalTokenAddress, fundingGoalVolume, bountyAddress } = params;
+              const tokenReq = getTokenReq(
+                fundingGoalTokenAddress,
+                fundingGoalVolume
+              );
+              const total = await getValueFromBalance(tokenReq, coinApiUrl);
+                result = await updateBountyValuation(baseUrl, openqApiSecret, {
+                budgetValue: total,
+                address: bountyAddress,
+              });
+            } catch (error) {
+              console.log(error);
+            }
+            resolve(result);
+          }
+          break;
         case "BountyClosed": {
           return resolve({});
         }
